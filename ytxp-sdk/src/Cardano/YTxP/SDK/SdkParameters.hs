@@ -26,14 +26,14 @@ import Numeric.Natural (Natural)
 import PlutusLedgerApi.V2 (CurrencySymbol)
 
 data TracingMode = DoTracing | NoTracing
-  deriving stock (Eq, Generic)
+  deriving stock (Eq, Generic, Show)
   deriving anyclass (ToJSON, FromJSON)
 
 -- Compilation config parameters
 newtype Config = Config
   { tracing :: TracingMode
   }
-  deriving stock (Eq, Generic)
+  deriving stock (Eq, Generic, Show)
   deriving newtype (ToJSON, FromJSON)
 
 -- | Parameters available during compilation (therefore not containing any script hashes).
@@ -52,12 +52,12 @@ data SdkParameters = SdkParameters
   , compilationConfig :: Config
   -- ^ Plutarch compilation config
   }
-  deriving stock (Eq, Generic)
+  deriving stock (Eq, Generic, Show)
   deriving anyclass (ToJSON, FromJSON)
 
 -- | Semantic newtype for the YieldList state thread currency symbol
 newtype YieldListSTCS = YieldListSTCS CurrencySymbol
-  deriving newtype (Eq, IsString)
+  deriving newtype (Eq, IsString, Show)
 
 instance FromJSON YieldListSTCS where
   {-# INLINEABLE parseJSON #-}
