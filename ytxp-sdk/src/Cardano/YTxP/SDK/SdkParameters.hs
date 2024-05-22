@@ -8,7 +8,9 @@ Description: Data required to work with the compiled control scripts
 -}
 module Cardano.YTxP.SDK.SdkParameters (
   SdkParameters (..),
-  YieldListSTCS (..),
+  YieldListSTCS (..), -- dont export constructor?
+  Config (..),
+  TracingMode (..),
 ) where
 
 import Control.Monad ((<=<))
@@ -53,7 +55,7 @@ data SdkParameters = SdkParameters
   deriving stock (Eq, Generic)
   deriving anyclass (ToJSON, FromJSON)
 
--- | Opaque, semantic newtype for the YieldList state thread currency symbol
+-- | Semantic newtype for the YieldList state thread currency symbol
 newtype YieldListSTCS = YieldListSTCS CurrencySymbol
   deriving newtype (Eq, IsString)
 
