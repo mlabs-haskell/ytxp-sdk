@@ -1,30 +1,21 @@
 module Main (main) where
 
 import Cardano.YTxP.SDK.SdkParameters (
-  Config (..),
+  Config (Config),
   SdkParameters (SdkParameters),
-  TracingMode (..),
-  YieldListSTCS (..),
+  TracingMode (DetTracing, DoTracing, DoTracingAndBinds, NoTracing),
  )
-import Control.Monad (guard)
 import Data.Aeson (encode)
-import Data.ByteString.Short (ShortByteString)
-import Data.Text (unpack)
-import GHC.Exts (fromList, toList)
 import Test.Laws (aesonLawsWith)
 import Test.QuickCheck (
   Gen,
-  NonNegative (NonNegative, getNonNegative),
+  NonNegative (getNonNegative),
   arbitrary,
-  counterexample,
   elements,
-  forAllShrinkShow,
-  shrink,
-  (===),
  )
 import Test.Tasty (adjustOption, defaultMain, testGroup)
 import Test.Tasty.Golden (goldenVsString)
-import Test.Tasty.QuickCheck (QuickCheckTests, testProperty)
+import Test.Tasty.QuickCheck (QuickCheckTests)
 
 main :: IO ()
 main =
@@ -54,24 +45,12 @@ sampleYLS =
 -- TODO: This definitely needs more thought.
 genCPI :: Gen SdkParameters
 genCPI = do
-  NonNegative myls' <- arbitrary
-  let myls = fromInteger myls'
   stakingValsNonceList <- map (fromInteger . getNonNegative) <$> arbitrary
   mintingPoliciesNonceList <- map (fromInteger . getNonNegative) <$> arbitrary
-  tm <- elements [NoTracing, DoTracing] -- , DetTracing, DoTracingAndBinds]
+  tm <- elements [NoTracing, DoTracing, DetTracing, DoTracingAndBinds]
   pure $
     SdkParameters
       stakingValsNonceList
       mintingPoliciesNonceList
       "aaaa"
       (Config tm)
-
-genSBS :: Gen ShortByteString
-genSBS = fromList <$> arbitrary
-
-shrinkSBS :: ShortByteString -> [ShortByteString]
-shrinkSBS sbs = do
-  let asList = toList sbs
-  shrunk <- shrink asList
-  guard (not . null $ shrunk)
-  pure . fromList $ shrunk

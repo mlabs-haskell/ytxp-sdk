@@ -7,8 +7,6 @@ import Data.Kind (Type)
 import Test.QuickCheck (
   Arbitrary (arbitrary, shrink),
   Gen,
-  Property,
-  counterexample,
   forAllShrink,
   (===),
  )

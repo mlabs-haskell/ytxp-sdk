@@ -25,7 +25,7 @@ import GHC.Generics (Generic)
 import Numeric.Natural (Natural)
 import PlutusLedgerApi.V2 (CurrencySymbol)
 
-data TracingMode = DoTracing | NoTracing
+data TracingMode = DoTracing | NoTracing | DetTracing | DoTracingAndBinds
   deriving stock (Eq, Generic, Show)
   deriving anyclass (ToJSON, FromJSON)
 

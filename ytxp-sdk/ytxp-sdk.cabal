@@ -92,7 +92,6 @@ common common-test
   build-depends:
     , base
     , tasty
-    , tasty-expected-failure
     , testlib
     , ytxp-sdk
 
@@ -131,11 +130,9 @@ test-suite ytxp-sdk-test
   build-depends:
     , aeson
     , base
-    , bytestring
     , QuickCheck
     , tasty-golden
     , tasty-quickcheck
-    , text
     , ytxp-sdk
 
   hs-source-dirs: test
