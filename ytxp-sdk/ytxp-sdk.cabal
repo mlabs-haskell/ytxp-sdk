@@ -13,6 +13,7 @@ flag dev
   default:     False
 
 -- Common stanzas
+
 common common-language
   ghc-options:
     -Wall -Wcompat -fprint-explicit-foralls -fprint-explicit-kinds
@@ -87,6 +88,16 @@ common common-language
 
   default-language:   Haskell2010
 
+common common-test
+  build-depends:
+    , base
+    , tasty
+    , tasty-expected-failure
+    , testlib
+    , ytxp-sdk
+
+  ghc-options:   -O2 -threaded -rtsopts -with-rtsopts=-N
+
 -- Libraries
 
 library
@@ -97,5 +108,34 @@ library
     , aeson
     , base               ^>=4.18.1.0
     , plutus-ledger-api
-    , prettyprinter
     , text
+
+library testlib
+  import:          common-language
+  build-depends:
+    , aeson
+    , base
+    , QuickCheck
+    , tasty
+    , tasty-quickcheck
+
+  hs-source-dirs:  testlib
+  exposed-modules: Test.Laws
+
+-- Executables
+
+test-suite ytxp-sdk-test
+  import:         common-language, common-test
+  type:           exitcode-stdio-1.0
+  main-is:        Main.hs
+  build-depends:
+    , aeson
+    , base
+    , bytestring
+    , QuickCheck
+    , tasty-golden
+    , tasty-quickcheck
+    , text
+    , ytxp-sdk
+
+  hs-source-dirs: test
