@@ -102,7 +102,10 @@ common common-test
 library
   import:          common-language
   hs-source-dirs:  src
-  exposed-modules: Cardano.YTxP.SDK.SdkParameters
+  exposed-modules:
+    Cardano.YTxP.SDK.ControlParameters
+    Cardano.YTxP.SDK.SdkParameters
+
   build-depends:
     , aeson
     , base               ^>=4.18.1.0
