@@ -3,12 +3,8 @@ Description: Data required to work with the compiled control scripts
 -}
 module Cardano.YTxP.SDK.ControlParameters (
   -- * Types
-  YieldingScripts (
-    yieldingMintingPolicies,
-    yieldingValidator,
-    yieldingStakingValidators
-  ),
-  ControlParameters (yieldingScripts, sdkParameters),
+  YieldingScripts (..),
+  ControlParameters (..),
 ) where
 
 import Cardano.YTxP.SDK.SdkParameters (SdkParameters (..))
