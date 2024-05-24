@@ -61,9 +61,6 @@ instance (KnownSymbol scriptLabel) => Show (HexStringScript scriptLabel) where
       scriptLabel' :: String
       scriptLabel' = symbolVal (Proxy @scriptLabel)
 
-unHexStringScript :: HexStringScript (scriptLabel :: Symbol) -> ShortByteString
-unHexStringScript (HexStringScript script) = script
-
 {- | Scripts that yield to transaction families identified by reference scripts
 which carry a state thread token
 -}
