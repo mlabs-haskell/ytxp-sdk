@@ -5,33 +5,77 @@ module Cardano.YTxP.SDK.ControlParameters (
   -- * Types
   YieldingScripts (..),
   ControlParameters (..),
+  HexStringScript (..),
+  sbsToHexText,
+  hexTextToSbs,
 ) where
 
-import Cardano.YTxP.SDK.SdkParameters (SdkParameters (..))
+import Cardano.YTxP.SDK.SdkParameters (SdkParameters)
+import Control.Monad ((<=<))
 import Data.Aeson (
   FromJSON (parseJSON),
   ToJSON (toEncoding, toJSON),
   object,
   pairs,
   withObject,
+  withText,
   (.:),
   (.=),
  )
+import Data.ByteString.Base16 qualified as Base16
+import Data.ByteString.Short (ShortByteString)
+import Data.ByteString.Short qualified as SBS
+import Data.Proxy (Proxy (Proxy))
 import Data.Text (Text)
+import Data.Text.Encoding qualified as TE
+import GHC.TypeLits (KnownSymbol, Symbol, symbolVal)
+
+{- | A helper newtype to ensure that any 'Script's we use are serialized (and
+deserialized), consistently. We also have a \'tag\' for a more specific type
+name or label when using a via derivation with this, or as part of a larger
+type.
+
+See @JSON.md@ for an explanation of our policy. TODO: update json policy
+-}
+newtype HexStringScript (scriptLabel :: Symbol) = HexStringScript ShortByteString
+  deriving newtype (Eq)
+
+instance ToJSON (HexStringScript scriptLabel) where
+  {-# INLINEABLE toJSON #-}
+  toJSON (HexStringScript script) = toJSON . sbsToHexText $ script
+  {-# INLINEABLE toEncoding #-}
+  toEncoding (HexStringScript script) = toEncoding . sbsToHexText $ script
+
+instance (KnownSymbol scriptLabel) => FromJSON (HexStringScript scriptLabel) where
+  {-# INLINEABLE parseJSON #-}
+  parseJSON =
+    (pure . HexStringScript)
+      <=< withText scriptLabel' hexTextToSbs
+    where
+      scriptLabel' :: String
+      scriptLabel' = symbolVal (Proxy @scriptLabel)
+
+instance (KnownSymbol scriptLabel) => Show (HexStringScript scriptLabel) where
+  show (HexStringScript script) = scriptLabel' <> " = " <> show script
+    where
+      scriptLabel' :: String
+      scriptLabel' = symbolVal (Proxy @scriptLabel)
+
+unHexStringScript :: HexStringScript (scriptLabel :: Symbol) -> ShortByteString
+unHexStringScript (HexStringScript script) = script
 
 {- | Scripts that yield to transaction families identified by reference scripts
 which carry a state thread token
-
-@since 0.1.0
 -}
 data YieldingScripts = YieldingScripts
-  { yieldingMintingPolicies :: [Text]
+  { yieldingMintingPolicies :: [HexStringScript "YieldingMP"]
   -- ^ @since 0.1.0
-  , yieldingValidator :: Text
+  , yieldingValidator :: HexStringScript "YieldingValidator"
   -- ^ @since 0.1.0
-  , yieldingStakingValidators :: [Text]
+  , yieldingStakingValidators :: [HexStringScript "YieldingSV"]
   -- ^ @since 0.1.0
   }
+  deriving stock (Eq, Show)
 
 -- | @since 0.1.0
 instance ToJSON YieldingScripts where
@@ -62,8 +106,6 @@ instance FromJSON YieldingScripts where
 they were compiled against. This is useful for _library consumers_
 and should contain all of the information needed to work with the
 library.
-
-@since 0.1.0
 -}
 data ControlParameters = ControlParameters
   { yieldingScripts :: YieldingScripts
@@ -71,6 +113,7 @@ data ControlParameters = ControlParameters
   , sdkParameters :: SdkParameters
   -- ^ @since 0.1.0
   }
+  deriving stock (Eq, Show)
 
 -- | @since 0.1.0
 instance ToJSON ControlParameters where
@@ -86,10 +129,21 @@ instance ToJSON ControlParameters where
       "yieldingScripts" .= yieldingScripts cp
         <> "sdkParameters" .= sdkParameters cp
 
--- | @since 0.1.0
 instance FromJSON ControlParameters where
   {-# INLINEABLE parseJSON #-}
   parseJSON = withObject "ControlParameters" $ \obj -> do
     ys <- obj .: "yieldingScripts"
     cpi <- obj .: "sdkParameters"
     pure $ ControlParameters ys cpi
+
+-- | Converts a 'ShortByteString' into a textual representation in hex.
+sbsToHexText :: ShortByteString -> Text
+sbsToHexText = TE.decodeUtf8 . Base16.encode . SBS.fromShort
+
+{- | Attempts to parse the given 'Text' into the 'ShortByteString' that would
+have produced it via 'sbsToHexText', indicating parse failures with 'fail'.
+-}
+hexTextToSbs :: (MonadFail m) => Text -> m ShortByteString
+hexTextToSbs t = case Base16.decode $ TE.encodeUtf8 t of
+  Left e -> fail e
+  Right b -> pure $ SBS.toShort b
