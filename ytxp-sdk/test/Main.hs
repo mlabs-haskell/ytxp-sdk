@@ -1,6 +1,6 @@
 module Main (main) where
 
-import Cardano.YTxP.SDK.ControlParameters (ControlParameters (ControlParameters), HexStringScript (..), YieldingScripts (..), hexTextToSbs, sbsToHexText)
+import Cardano.YTxP.SDK.ControlParameters (ControlParameters (ControlParameters), HexStringScript (HexStringScript), YieldingScripts (YieldingScripts, yieldingMintingPolicies, yieldingStakingValidators, yieldingValidator), hexTextToSbs, sbsToHexText)
 import Cardano.YTxP.SDK.SdkParameters (
   Config (Config),
   SdkParameters (SdkParameters),
@@ -14,8 +14,6 @@ import Data.Text (unpack)
 import GHC.Exts (fromList, toList)
 import PlutusLedgerApi.V1.Value (
   CurrencySymbol (CurrencySymbol),
-  Value,
-  singleton,
  )
 import PlutusLedgerApi.V2 (getLedgerBytes)
 import Test.Laws (aesonLawsWith)
