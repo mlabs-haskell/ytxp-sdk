@@ -1,0 +1,8 @@
+[default]
+extend-ignore-identifiers-re = [
+    "orgc.*"
+]
+[ default.extend-words ]
+strat = "strat"
+lits = "lits"
+wheres = "wheres"

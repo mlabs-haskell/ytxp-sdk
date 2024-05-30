@@ -13,6 +13,7 @@ flag dev
   default:     False
 
 -- Common stanzas
+
 common common-language
   ghc-options:
     -Wall -Wcompat -fprint-explicit-foralls -fprint-explicit-kinds
@@ -90,6 +91,53 @@ common common-language
 -- Libraries
 
 library
+  import:          common-language
+  hs-source-dirs:  src
+  exposed-modules:
+    Cardano.YTxP.SDK.ControlParameters
+    Cardano.YTxP.SDK.Redeemers
+    Cardano.YTxP.SDK.SdkParameters
+
+  other-modules:   Cardano.YTxP.SDK.Vendored
+  build-depends:
+    , aeson
+    , base               ^>=4.18.1.0
+    , base16-bytestring
+    , bytestring
+    , plutus-ledger-api
+    , plutus-tx
+    , text
+
+library testlib
+  import:          common-language
+  build-depends:
+    , aeson
+    , base
+    , QuickCheck
+    , tasty
+    , tasty-quickcheck
+
+  hs-source-dirs:  testlib
+  exposed-modules: Test.Laws
+
+-- Executables
+
+test-suite ytxp-sdk-test
   import:         common-language
-  hs-source-dirs: src
-  build-depends:  base ^>=4.18.1.0
+  type:           exitcode-stdio-1.0
+  main-is:        Main.hs
+  build-depends:
+    , aeson
+    , base
+    , bytestring
+    , plutus-ledger-api
+    , QuickCheck
+    , tasty
+    , tasty-golden
+    , tasty-quickcheck
+    , testlib
+    , text
+    , ytxp-sdk
+
+  ghc-options:    -O2 -threaded -rtsopts -with-rtsopts=-N
+  hs-source-dirs: test
