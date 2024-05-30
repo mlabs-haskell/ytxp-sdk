@@ -8,7 +8,7 @@ Description: Data required to work with the compiled control scripts
 -}
 module Cardano.YTxP.SDK.SdkParameters (
   SdkParameters (..),
-  YieldListSTCS (..), -- dont export constructor?
+  AuthorisedScriptsSTCS (..),
   Config (..),
   TracingMode (..),
 ) where
@@ -46,7 +46,7 @@ data SdkParameters = SdkParameters
   -- ^ A list of nonces for the yielding minting policies. One minting
   -- policy is compiled for each nonce.
   -- @since 0.1.0
-  , authorisedScriptsSTCS :: YieldListSTCS
+  , authorisedScriptsSTCS :: AuthorisedScriptsSTCS
   -- ^ The Currency symbol of the token that identifies authorised reference scripts .
   -- @since 0.1.0
   , compilationConfig :: Config
@@ -56,18 +56,18 @@ data SdkParameters = SdkParameters
   deriving anyclass (ToJSON, FromJSON)
 
 -- | Semantic newtype for the YieldList state thread currency symbol
-newtype YieldListSTCS = YieldListSTCS CurrencySymbol
+newtype AuthorisedScriptsSTCS = AuthorisedScriptsSTCS CurrencySymbol
   deriving newtype (Eq, IsString, Show)
 
-instance FromJSON YieldListSTCS where
+instance FromJSON AuthorisedScriptsSTCS where
   {-# INLINEABLE parseJSON #-}
   parseJSON =
-    (pure . YieldListSTCS)
-      <=< withText "YieldListSTCS" (pure . fromString . unpack)
+    (pure . AuthorisedScriptsSTCS)
+      <=< withText "AuthorisedScriptsSTCS" (pure . fromString . unpack)
 
-instance ToJSON YieldListSTCS where
+instance ToJSON AuthorisedScriptsSTCS where
   {-# INLINEABLE toJSON #-}
-  toJSON (YieldListSTCS cs) = toJSON . show $ cs
+  toJSON (AuthorisedScriptsSTCS cs) = toJSON . show $ cs
 
   {-# INLINEABLE toEncoding #-}
-  toEncoding (YieldListSTCS cs) = toEncoding . show $ cs
+  toEncoding (AuthorisedScriptsSTCS cs) = toEncoding . show $ cs

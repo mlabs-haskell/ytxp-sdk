@@ -2,10 +2,10 @@ module Main (main) where
 
 import Cardano.YTxP.SDK.ControlParameters (ControlParameters (ControlParameters), HexStringScript (HexStringScript), YieldingScripts (YieldingScripts, yieldingMintingPolicies, yieldingStakingValidators, yieldingValidator), hexTextToSbs, sbsToHexText)
 import Cardano.YTxP.SDK.SdkParameters (
+  AuthorisedScriptsSTCS (AuthorisedScriptsSTCS),
   Config (Config),
   SdkParameters (SdkParameters),
   TracingMode (DetTracing, DoTracing, DoTracingAndBinds, NoTracing),
-  YieldListSTCS (YieldListSTCS),
  )
 import Control.Monad (guard)
 import Data.Aeson (encode)
@@ -57,7 +57,7 @@ sampleYLS =
   SdkParameters
     [1, 2]
     [1, 2, 3]
-    (YieldListSTCS dummySymbolOne)
+    (AuthorisedScriptsSTCS dummySymbolOne)
     (Config NoTracing)
 
 -- Generators and shrinkers
@@ -72,7 +72,7 @@ genSdkParams = do
     SdkParameters
       stakingValsNonceList
       mintingPoliciesNonceList
-      (YieldListSTCS dummySymbolOne)
+      (AuthorisedScriptsSTCS dummySymbolOne)
       (Config tm)
 
 genControlParams :: Gen ControlParameters
