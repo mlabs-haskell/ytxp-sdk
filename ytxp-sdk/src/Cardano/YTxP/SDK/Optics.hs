@@ -1,8 +1,10 @@
-module Cardano.YTxP.SDK.Optics where
+{-# OPTIONS_GHC -fno-warn-orphans #-}
+
+module Cardano.YTxP.SDK.Optics (HasYieldingRedeemer (..)) where
 
 import Cardano.YTxP.SDK.Redeemers (AuthorisedScriptIndex, AuthorisedScriptProofIndex, YieldingRedeemer)
 
-import Control.Lens (makeClassy, makeClassyFor, makeWrapped)
+import Control.Lens (makeClassyFor, makeWrapped)
 
 makeWrapped ''AuthorisedScriptProofIndex
 
