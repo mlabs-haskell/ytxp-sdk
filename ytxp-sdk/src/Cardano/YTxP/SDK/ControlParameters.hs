@@ -86,9 +86,12 @@ instance ToJSON YieldingScripts where
   {-# INLINEABLE toEncoding #-}
   toEncoding ys =
     pairs $
-      "yieldingMintingPolicies" .= yieldingMintingPolicies ys
-        <> "yieldingValidator" .= yieldingValidator ys
-        <> "yieldingStakingValidators" .= yieldingStakingValidators ys
+      "yieldingMintingPolicies"
+        .= yieldingMintingPolicies ys
+        <> "yieldingValidator"
+        .= yieldingValidator ys
+        <> "yieldingStakingValidators"
+        .= yieldingStakingValidators ys
 
 -- | @since 0.1.0
 instance FromJSON YieldingScripts where
@@ -123,8 +126,10 @@ instance ToJSON ControlParameters where
   {-# INLINEABLE toEncoding #-}
   toEncoding cp =
     pairs $
-      "yieldingScripts" .= yieldingScripts cp
-        <> "sdkParameters" .= sdkParameters cp
+      "yieldingScripts"
+        .= yieldingScripts cp
+        <> "sdkParameters"
+        .= sdkParameters cp
 
 instance FromJSON ControlParameters where
   {-# INLINEABLE parseJSON #-}
