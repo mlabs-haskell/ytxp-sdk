@@ -10,10 +10,10 @@ repository cardano-haskell-packages
     d4a35cd3121aa00d18544bb0ac01c3e1691d618f462c46129271bccf39f7e8ee
 
 packages:
-  ./ytxp-sdk.cabal
+  ytxp-sdk/ytxp-sdk.cabal
 
 tests: true
 
 constraints:
-  , plutus-core == 1.20.0.0
+  , plutus-core == 1.23.0.0
 

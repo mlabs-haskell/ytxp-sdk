@@ -19,8 +19,10 @@ common common-language
     -Wall -Wcompat -fprint-explicit-foralls -fprint-explicit-kinds
     -fwarn-missing-import-lists -Weverything -Wno-unsafe
     -Wno-missing-safe-haskell-mode -Wno-implicit-prelude
-    -Wno-missing-kind-signatures -Wno-all-missed-specializations
-    -Wno-operator-whitespace
+    -Wno-all-missed-specializations
+
+  if impl(ghc >9)
+    ghc-options: -Wno-missing-kind-signatures -Wno-operator-whitespace
 
   if !flag(dev)
     ghc-options: -Werror
@@ -102,7 +104,7 @@ library
   other-modules:   Cardano.YTxP.SDK.Vendored
   build-depends:
     , aeson
-    , base               ^>=4.18.1.0
+    , base
     , base16-bytestring
     , bytestring
     , lens

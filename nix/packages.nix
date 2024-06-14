@@ -13,12 +13,14 @@
         })
       ];
       pkgs = config._module.args.pkgs.extend (lib.composeManyExtensions overlays);
-      flake = pkgs.ytxp-sdk.flake { };
+      flake-96 = pkgs.ytxp-sdk-96.flake { };
+      flake-810 = pkgs.ytxp-sdk-810.flake { };
     in
     {
-      packages = with flake.packages; {
-        inherit "ytxp-sdk:lib:ytxp-sdk";
+      packages = {
+        ytxp-lib-96 = flake-96.packages."ytxp-sdk:lib:ytxp-sdk";
+        ytxp-lib-810 = flake-810.packages."ytxp-sdk:lib:ytxp-sdk";
       };
-      inherit (flake) devShells;
+      inherit (flake-96) devShells;
     };
 }
