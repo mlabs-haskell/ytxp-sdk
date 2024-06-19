@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE ImpredicativeTypes #-}
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 
@@ -23,8 +24,11 @@ import Data.String (IsString, fromString)
 import Data.Text (unpack)
 import GHC.Generics (Generic)
 import Numeric.Natural (Natural)
+#if MIN_VERSION_plutus_ledger_api(1,1,1)
 import PlutusLedgerApi.V2 (CurrencySymbol)
-
+#else
+import Plutus.V2.Ledger.Api (CurrencySymbol)
+#endif
 data TracingMode = DoTracing | NoTracing | DetTracing | DoTracingAndBinds
   deriving stock (Eq, Generic, Show)
   deriving anyclass (ToJSON, FromJSON)
