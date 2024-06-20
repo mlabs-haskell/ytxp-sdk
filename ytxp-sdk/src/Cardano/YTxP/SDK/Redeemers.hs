@@ -8,12 +8,12 @@ import PlutusTx qualified
 
 -- | Represents an index into a authorised reference script in a TxInReferenceInput list
 newtype AuthorisedScriptIndex = AuthorisedScriptIndex Integer
-  deriving newtype (PlutusTx.ToData, PlutusTx.FromData, PlutusTx.UnsafeFromData)
+  deriving newtype (Show, Eq, PlutusTx.ToData, PlutusTx.FromData, PlutusTx.UnsafeFromData)
 
 {- The type of yielded to scripts
 -}
 data AuthorisedScriptPurpose = Minting | Spending | Rewarding
-  deriving stock (Show, Generic, Enum, Bounded)
+  deriving stock (Show, Generic, Eq, Enum, Bounded)
   deriving
     (PlutusTx.ToData, PlutusTx.FromData, PlutusTx.UnsafeFromData)
     via (EnumIsData AuthorisedScriptPurpose)
@@ -21,7 +21,7 @@ data AuthorisedScriptPurpose = Minting | Spending | Rewarding
 {- Index for the yielding redeemer
 -}
 newtype AuthorisedScriptProofIndex = AuthorisedScriptProofIndex (AuthorisedScriptPurpose, Integer)
-  deriving newtype (PlutusTx.ToData, PlutusTx.FromData, PlutusTx.UnsafeFromData)
+  deriving newtype (Show, Eq, PlutusTx.ToData, PlutusTx.FromData, PlutusTx.UnsafeFromData)
 
 {- | The redeemer passed to the yielding minting policy, validator,
 and staking validators
@@ -32,5 +32,6 @@ data YieldingRedeemer = YieldingRedeemer
   , authorisedScriptProofIndex :: AuthorisedScriptProofIndex
   -- ^ A tuple containing yielded to script type and the index at which to find proof: this allows us to avoid having to loop through inputs/mints/withdrawls to find the script we want to ensure is run.
   }
+  deriving stock (Show, Generic, Eq)
 
 PlutusTx.makeIsDataIndexed ''YieldingRedeemer [('YieldingRedeemer, 0)]
