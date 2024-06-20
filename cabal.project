@@ -13,7 +13,3 @@ packages:
   ytxp-sdk/ytxp-sdk.cabal
 
 tests: true
-
-constraints:
-  , plutus-core == 1.23.0.0
-
