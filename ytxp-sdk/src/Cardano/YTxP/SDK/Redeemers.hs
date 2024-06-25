@@ -2,7 +2,6 @@
 
 module Cardano.YTxP.SDK.Redeemers (AuthorisedScriptIndex (AuthorisedScriptIndex), AuthorisedScriptPurpose (Minting, Spending, Rewarding), AuthorisedScriptProofIndex (AuthorisedScriptProofIndex), YieldingRedeemer (YieldingRedeemer, authorisedScriptIndex, authorisedScriptProofIndex)) where
 
-import Cardano.YTxP.SDK.Vendored (EnumIsData (EnumIsData))
 import GHC.Generics (Generic)
 import PlutusTx qualified
 import PlutusTx.Prelude qualified as PlutusTx
@@ -15,9 +14,8 @@ newtype AuthorisedScriptIndex = AuthorisedScriptIndex Integer
 -}
 data AuthorisedScriptPurpose = Minting | Spending | Rewarding
   deriving stock (Show, Generic, Eq, Enum, Bounded)
-  deriving
-    (PlutusTx.ToData, PlutusTx.FromData, PlutusTx.UnsafeFromData)
-    via (EnumIsData AuthorisedScriptPurpose)
+
+PlutusTx.makeIsDataIndexed ''AuthorisedScriptPurpose [('Minting, 0), ('Spending, 1), ('Rewarding, 2)]
 
 instance PlutusTx.Eq AuthorisedScriptPurpose where
   {-# INLINEABLE (==) #-}

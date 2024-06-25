@@ -101,7 +101,6 @@ library
     Cardano.YTxP.SDK.Redeemers
     Cardano.YTxP.SDK.SdkParameters
 
-  other-modules:   Cardano.YTxP.SDK.Vendored
   build-depends:
     , aeson
     , base
