@@ -107,6 +107,7 @@ library
     , base16-bytestring
     , bytestring
     , lens
+    , plutus-core
     , plutus-ledger-api
     , plutus-tx
     , text
