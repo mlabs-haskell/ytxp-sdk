@@ -24,6 +24,8 @@ import Data.String (IsString, fromString)
 import Data.Text (unpack)
 import GHC.Generics (Generic)
 import Numeric.Natural (Natural)
+import PlutusCore (DefaultUni)
+import PlutusTx qualified
 #if MIN_VERSION_plutus_ledger_api(1,1,0)
 import PlutusLedgerApi.V2 (CurrencySymbol)
 #else
@@ -61,7 +63,16 @@ data SdkParameters = SdkParameters
 
 -- | Semantic newtype for the YieldList state thread currency symbol
 newtype AuthorisedScriptsSTCS = AuthorisedScriptsSTCS CurrencySymbol
-  deriving newtype (Eq, IsString, Show)
+  deriving newtype
+    ( Eq
+    , IsString
+    , Show
+    , PlutusTx.ToData
+    , PlutusTx.FromData
+    , PlutusTx.UnsafeFromData
+    , PlutusTx.Typeable DefaultUni
+    , PlutusTx.Lift DefaultUni
+    )
 
 instance FromJSON AuthorisedScriptsSTCS where
   {-# INLINEABLE parseJSON #-}
