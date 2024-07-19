@@ -3,9 +3,7 @@ module Main (main) where
 import Cardano.YTxP.SDK.ControlParameters (ControlParameters (ControlParameters), HexStringScript (HexStringScript), YieldingScripts (YieldingScripts, yieldingMintingPolicies, yieldingStakingValidators, yieldingValidator), hexTextToSbs, sbsToHexText)
 import Cardano.YTxP.SDK.SdkParameters (
   AuthorisedScriptsSTCS (AuthorisedScriptsSTCS),
-  Config (Config),
   SdkParameters (SdkParameters),
-  TracingMode (DetTracing, DoTracing, DoTracingAndBinds, NoTracing),
  )
 import Control.Monad (guard)
 import Data.Aeson (encode)
@@ -22,7 +20,6 @@ import Test.QuickCheck (
   NonNegative (getNonNegative),
   arbitrary,
   counterexample,
-  elements,
   shrink,
   (===),
  )
@@ -58,7 +55,6 @@ sampleYLS =
     [1, 2]
     [1, 2, 3]
     (AuthorisedScriptsSTCS dummySymbolOne)
-    (Config NoTracing)
 
 -- Generators and shrinkers
 
@@ -67,13 +63,11 @@ genSdkParams :: Gen SdkParameters
 genSdkParams = do
   stakingValsNonceList <- map (fromInteger . getNonNegative) <$> arbitrary
   mintingPoliciesNonceList <- map (fromInteger . getNonNegative) <$> arbitrary
-  tm <- elements [NoTracing, DoTracing, DetTracing, DoTracingAndBinds]
   pure $
     SdkParameters
       stakingValsNonceList
       mintingPoliciesNonceList
       (AuthorisedScriptsSTCS dummySymbolOne)
-      (Config tm)
 
 genControlParams :: Gen ControlParameters
 genControlParams = do
