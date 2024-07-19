@@ -10,8 +10,6 @@ Description: Data required to work with the compiled control scripts
 module Cardano.YTxP.SDK.SdkParameters (
   SdkParameters (..),
   AuthorisedScriptsSTCS (..),
-  Config (..),
-  TracingMode (..),
 ) where
 
 import Control.Monad ((<=<))
@@ -31,16 +29,6 @@ import PlutusLedgerApi.V2 (CurrencySymbol)
 #else
 import Plutus.V2.Ledger.Api (CurrencySymbol)
 #endif
-data TracingMode = DoTracing | NoTracing | DetTracing | DoTracingAndBinds
-  deriving stock (Eq, Generic, Show)
-  deriving anyclass (ToJSON, FromJSON)
-
--- Compilation config parameters
-newtype Config = Config
-  { tracing :: TracingMode
-  }
-  deriving stock (Eq, Generic, Show)
-  deriving newtype (ToJSON, FromJSON)
 
 -- | Parameters available during compilation (therefore not containing any script hashes).
 data SdkParameters = SdkParameters
@@ -55,8 +43,6 @@ data SdkParameters = SdkParameters
   , authorisedScriptsSTCS :: AuthorisedScriptsSTCS
   -- ^ The Currency symbol of the token that identifies authorised reference scripts .
   -- @since 0.1.0
-  , compilationConfig :: Config
-  -- ^ Plutarch compilation config
   }
   deriving stock (Eq, Generic, Show)
   deriving anyclass (ToJSON, FromJSON)
