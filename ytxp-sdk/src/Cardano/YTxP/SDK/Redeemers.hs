@@ -23,12 +23,17 @@ instance PlutusTx.ToData AuthorisedScriptPurpose where
 instance PlutusTx.FromData AuthorisedScriptPurpose where
   {-# INLINEABLE fromBuiltinData #-}
   fromBuiltinData d = case PlutusTx.fromBuiltinData @Integer d of
-    Nothing -> Nothing
-    Just i
-      | i == 0 -> Just Minting
-      | i == 1 -> Just Spending
-      | i == 2 -> Just Rewarding
-      | otherwise -> Nothing
+    PlutusTx.Nothing -> PlutusTx.Nothing
+    PlutusTx.Just i ->
+      if i PlutusTx.== 0
+        then PlutusTx.Just Minting
+        else
+          if i PlutusTx.== 1
+            then PlutusTx.Just Spending
+            else
+              if i PlutusTx.== 2
+                then PlutusTx.Just Rewarding
+                else PlutusTx.Nothing
 
 instance PlutusTx.UnsafeFromData AuthorisedScriptPurpose where
   {-# INLINEABLE unsafeFromBuiltinData #-}
