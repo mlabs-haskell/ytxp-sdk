@@ -15,7 +15,8 @@ newtype AuthorisedScriptIndex = AuthorisedScriptIndex Integer
 data AuthorisedScriptPurpose = Minting | Spending | Rewarding
   deriving stock (Show, Generic, Eq, Enum, Bounded)
 
--- PlutusTx.makeIsDataIndexed ''AuthorisedScriptPurpose [('Minting, 0), ('Spending, 1), ('Rewarding, 2)]
+-- We write these instances like this to match the plutarch type implementation
+-- that uses the fact that a type is an enum to encode it directly with integers onchain
 instance PlutusTx.ToData AuthorisedScriptPurpose where
   {-# INLINEABLE toBuiltinData #-}
   toBuiltinData = PlutusTx.toBuiltinData . toInteger . fromEnum
