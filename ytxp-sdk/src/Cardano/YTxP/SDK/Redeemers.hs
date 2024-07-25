@@ -15,7 +15,26 @@ newtype AuthorisedScriptIndex = AuthorisedScriptIndex Integer
 data AuthorisedScriptPurpose = Minting | Spending | Rewarding
   deriving stock (Show, Generic, Eq, Enum, Bounded)
 
-PlutusTx.makeIsDataIndexed ''AuthorisedScriptPurpose [('Minting, 0), ('Spending, 1), ('Rewarding, 2)]
+-- PlutusTx.makeIsDataIndexed ''AuthorisedScriptPurpose [('Minting, 0), ('Spending, 1), ('Rewarding, 2)]
+instance PlutusTx.ToData AuthorisedScriptPurpose where
+  {-# INLINEABLE toBuiltinData #-}
+  toBuiltinData = PlutusTx.toBuiltinData . toInteger . fromEnum
+
+instance PlutusTx.FromData AuthorisedScriptPurpose where
+  {-# INLINEABLE fromBuiltinData #-}
+  fromBuiltinData d = case PlutusTx.fromBuiltinData @Integer d of
+    Nothing -> Nothing
+    Just i
+      | i == 0 -> Just Minting
+      | i == 1 -> Just Spending
+      | i == 2 -> Just Rewarding
+      | otherwise -> Nothing
+
+instance PlutusTx.UnsafeFromData AuthorisedScriptPurpose where
+  {-# INLINEABLE unsafeFromBuiltinData #-}
+  unsafeFromBuiltinData d = case PlutusTx.fromBuiltinData d of
+    Nothing -> PlutusTx.error ()
+    Just i -> i
 
 instance PlutusTx.Eq AuthorisedScriptPurpose where
   {-# INLINEABLE (==) #-}
