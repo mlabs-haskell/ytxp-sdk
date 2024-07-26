@@ -19,7 +19,9 @@ common common-language
     -Wall -Wcompat -fprint-explicit-foralls -fprint-explicit-kinds
     -fwarn-missing-import-lists -Weverything -Wno-unsafe
     -Wno-missing-safe-haskell-mode -Wno-implicit-prelude
-    -Wno-all-missed-specializations
+    -Wno-all-missed-specializations -fno-strictness -fno-specialise
+    -fno-spec-constr -fno-unbox-strict-fields
+    -fno-unbox-small-strict-fields
 
   if impl(ghc >9)
     ghc-options: -Wno-missing-kind-signatures -Wno-operator-whitespace
