@@ -1,9 +1,10 @@
 {-# LANGUAGE AllowAmbiguousTypes #-}
 
-module Test.Laws (aesonLaws, aesonLawsWith) where
+module Test.Laws (aesonLaws, aesonLawsWith, plutusTxDataLaws, plutusTxDataLawsWith) where
 
 import Data.Aeson (FromJSON, ToJSON (toJSON), decode, encode)
 import Data.Kind (Type)
+import PlutusTx qualified
 import Test.QuickCheck (
   Arbitrary (arbitrary, shrink),
   Gen,
@@ -51,6 +52,31 @@ aesonLawsWith gen shr =
   where
     groupName :: String
     groupName = "Aeson laws for " <> typeName @a
+
+plutusTxDataLaws ::
+  forall (a :: Type).
+  (Typeable a, PlutusTx.ToData a, PlutusTx.FromData a, PlutusTx.UnsafeFromData a, Arbitrary a, Show a, Eq a) =>
+  TestTree
+plutusTxDataLaws = plutusTxDataLawsWith @a arbitrary shrink
+
+plutusTxDataLawsWith ::
+  forall (a :: Type).
+  (Typeable a, PlutusTx.ToData a, PlutusTx.FromData a, PlutusTx.UnsafeFromData a, Eq a, Show a) =>
+  Gen a ->
+  (a -> [a]) ->
+  TestTree
+plutusTxDataLawsWith gen shr =
+  testGroup
+    groupName
+    [ testProperty "fromData . toData = Just" . forAllShrink gen shr $ \x ->
+        Just x === (PlutusTx.fromBuiltinData . PlutusTx.toBuiltinData $ x)
+    , testProperty "unsafeFromData . toData = id"
+        . forAllShrink gen shr
+        $ \x -> (PlutusTx.unsafeFromBuiltinData . PlutusTx.toBuiltinData $ x) === x
+    ]
+  where
+    groupName :: String
+    groupName = "PlutusTx data laws for " <> typeName @a
 
 -- Helpers
 

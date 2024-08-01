@@ -5,15 +5,19 @@ module Cardano.YTxP.SDK.Redeemers (AuthorisedScriptIndex (AuthorisedScriptIndex)
 import GHC.Generics (Generic)
 import PlutusTx qualified
 import PlutusTx.Prelude qualified as PlutusTx
+import Test.QuickCheck (Arbitrary (arbitrary), arbitraryBoundedEnum)
 
 -- | Represents an index into a authorised reference script in a TxInReferenceInput list
 newtype AuthorisedScriptIndex = AuthorisedScriptIndex Integer
-  deriving newtype (Show, Eq, PlutusTx.ToData, PlutusTx.FromData, PlutusTx.UnsafeFromData, PlutusTx.Eq)
+  deriving newtype (Show, Eq, PlutusTx.ToData, PlutusTx.FromData, PlutusTx.UnsafeFromData, PlutusTx.Eq, Arbitrary)
 
 {- The type of yielded to scripts
 -}
 data AuthorisedScriptPurpose = Minting | Spending | Rewarding
   deriving stock (Show, Generic, Eq, Enum, Bounded)
+
+instance Arbitrary AuthorisedScriptPurpose where
+  arbitrary = arbitraryBoundedEnum
 
 -- We write these instances like this to match the plutarch type implementation
 -- that uses the fact that a type is an enum to encode it directly with integers onchain
@@ -52,7 +56,7 @@ instance PlutusTx.Eq AuthorisedScriptPurpose where
 {- Index for the yielding redeemer
 -}
 newtype AuthorisedScriptProofIndex = AuthorisedScriptProofIndex (AuthorisedScriptPurpose, Integer)
-  deriving newtype (Show, Eq, PlutusTx.ToData, PlutusTx.FromData, PlutusTx.UnsafeFromData, PlutusTx.Eq)
+  deriving newtype (Show, Eq, PlutusTx.ToData, PlutusTx.FromData, PlutusTx.UnsafeFromData, PlutusTx.Eq, Arbitrary)
 
 {- | The redeemer passed to the yielding minting policy, validator,
 and staking validators
@@ -64,6 +68,9 @@ data YieldingRedeemer = YieldingRedeemer
   -- ^ A tuple containing yielded to script type and the index at which to find proof: this allows us to avoid having to loop through inputs/mints/withdrawls to find the script we want to ensure is run.
   }
   deriving stock (Show, Generic, Eq)
+
+instance Arbitrary YieldingRedeemer where
+  arbitrary = YieldingRedeemer <$> arbitrary <*> arbitrary
 
 instance PlutusTx.Eq YieldingRedeemer where
   {-# INLINEABLE (==) #-}
