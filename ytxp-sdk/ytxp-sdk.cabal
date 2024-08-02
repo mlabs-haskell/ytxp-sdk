@@ -112,6 +112,7 @@ library
     , plutus-core
     , plutus-ledger-api
     , plutus-tx
+    , QuickCheck
     , text
 
 library testlib
@@ -119,6 +120,7 @@ library testlib
   build-depends:
     , aeson
     , base
+    , plutus-tx
     , QuickCheck
     , tasty
     , tasty-quickcheck
@@ -137,6 +139,7 @@ test-suite ytxp-sdk-test
     , base
     , bytestring
     , plutus-ledger-api
+    , plutus-tx
     , QuickCheck
     , tasty
     , tasty-golden

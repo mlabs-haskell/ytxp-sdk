@@ -1,6 +1,7 @@
 module Main (main) where
 
 import Cardano.YTxP.SDK.ControlParameters (ControlParameters (ControlParameters), HexStringScript (HexStringScript), YieldingScripts (YieldingScripts, yieldingMintingPolicies, yieldingStakingValidators, yieldingValidator), hexTextToSbs, sbsToHexText)
+import Cardano.YTxP.SDK.Redeemers (AuthorisedScriptIndex (AuthorisedScriptIndex), AuthorisedScriptProofIndex (AuthorisedScriptProofIndex), AuthorisedScriptPurpose (Minting), YieldingRedeemer (YieldingRedeemer))
 import Cardano.YTxP.SDK.SdkParameters (
   AuthorisedScriptsSTCS (AuthorisedScriptsSTCS),
   SdkParameters (SdkParameters),
@@ -9,12 +10,13 @@ import Control.Monad (guard)
 import Data.Aeson (encode)
 import Data.ByteString.Short (ShortByteString)
 import Data.Text (unpack)
-import GHC.Exts (fromList, toList)
+import GHC.Exts (fromList, fromString, toList)
 import PlutusLedgerApi.V1.Value (
   CurrencySymbol (CurrencySymbol),
  )
 import PlutusLedgerApi.V2 (getLedgerBytes)
-import Test.Laws (aesonLawsWith)
+import PlutusTx qualified
+import Test.Laws (aesonLawsWith, plutusTxDataLaws)
 import Test.QuickCheck (
   Gen,
   NonNegative (getNonNegative),
@@ -38,6 +40,26 @@ main =
                 Just sbs === (hexTextToSbs . sbsToHexText $ sbs)
     , aesonLawsWith @SdkParameters genSdkParams (const [])
     , aesonLawsWith @ControlParameters genControlParams (const [])
+    , plutusTxDataLaws @AuthorisedScriptIndex
+    , plutusTxDataLaws @AuthorisedScriptPurpose
+    , plutusTxDataLaws @AuthorisedScriptProofIndex
+    , plutusTxDataLaws @YieldingRedeemer
+    , goldenVsString
+        "AuthScriptIndex"
+        "goldens/AuthScriptIndex.golden"
+        (pure . fromString . show . PlutusTx.toBuiltinData $ sampleAuthScriptIndex)
+    , goldenVsString
+        "AuthorisedScriptPurpose"
+        "goldens/AuthorisedScriptPurpose.golden"
+        (pure . fromString . show . PlutusTx.toBuiltinData $ sampleAuthorisedScriptPurpose)
+    , goldenVsString
+        "AuthorisedScriptProofIndex"
+        "goldens/AuthorisedScriptProofIndex.golden"
+        (pure . fromString . show . PlutusTx.toBuiltinData $ sampleAuthorisedScriptProofIndex)
+    , goldenVsString
+        "YieldingRedeemer"
+        "goldens/YieldingRedeemer.golden"
+        (pure . fromString . show . PlutusTx.toBuiltinData $ sampleYieldingRedeemer)
     , goldenVsString
         "SdkParameters"
         "goldens/SdkParameters.golden"
@@ -55,6 +77,18 @@ sampleYLS =
     [1, 2]
     [1, 2, 3]
     (AuthorisedScriptsSTCS dummySymbolOne)
+
+sampleAuthScriptIndex :: AuthorisedScriptIndex
+sampleAuthScriptIndex = AuthorisedScriptIndex 0
+
+sampleAuthorisedScriptPurpose :: AuthorisedScriptPurpose
+sampleAuthorisedScriptPurpose = Minting
+
+sampleAuthorisedScriptProofIndex :: AuthorisedScriptProofIndex
+sampleAuthorisedScriptProofIndex = AuthorisedScriptProofIndex (sampleAuthorisedScriptPurpose, 0)
+
+sampleYieldingRedeemer :: YieldingRedeemer
+sampleYieldingRedeemer = YieldingRedeemer sampleAuthScriptIndex sampleAuthorisedScriptProofIndex
 
 -- Generators and shrinkers
 
