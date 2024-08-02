@@ -24,6 +24,8 @@ import GHC.Generics (Generic)
 import Numeric.Natural (Natural)
 import PlutusCore (DefaultUni)
 import PlutusTx qualified
+import Prettyprinter (Pretty, align, braces, dquotes, pretty, punctuate, vsep, (<+>))
+
 #if MIN_VERSION_plutus_ledger_api(1,1,0)
 import PlutusLedgerApi.V2 (CurrencySymbol)
 #else
@@ -47,6 +49,14 @@ data SdkParameters = SdkParameters
   deriving stock (Eq, Generic, Show)
   deriving anyclass (ToJSON, FromJSON)
 
+instance Pretty SdkParameters where
+  pretty SdkParameters {stakingValidatorsNonceList, mintingPoliciesNonceList, authorisedScriptsSTCS} =
+    ("SdkParameters:" <+>) . braces . align . vsep . punctuate "," $
+      [ "stakingValidatorsNonceList:" <+> pretty stakingValidatorsNonceList
+      , "mintingPoliciesNonceList:" <+> pretty mintingPoliciesNonceList
+      , "authorisedScriptsSTCS:" <+> dquotes (pretty authorisedScriptsSTCS)
+      ]
+
 -- | Semantic newtype for the YieldList state thread currency symbol
 newtype AuthorisedScriptsSTCS = AuthorisedScriptsSTCS CurrencySymbol
   deriving newtype
@@ -58,6 +68,7 @@ newtype AuthorisedScriptsSTCS = AuthorisedScriptsSTCS CurrencySymbol
     , PlutusTx.UnsafeFromData
     , PlutusTx.Typeable DefaultUni
     , PlutusTx.Lift DefaultUni
+    , Pretty
     )
 
 instance FromJSON AuthorisedScriptsSTCS where
