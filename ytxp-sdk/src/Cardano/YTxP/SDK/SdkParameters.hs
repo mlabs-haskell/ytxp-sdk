@@ -25,9 +25,9 @@ import Numeric.Natural (Natural)
 import PlutusCore (DefaultUni)
 import PlutusTx qualified
 #if MIN_VERSION_plutus_ledger_api(1,1,0)
-import PlutusLedgerApi.V2 (CurrencySymbol)
+import PlutusLedgerApi.V3 (CurrencySymbol)
 #else
-import Plutus.V2.Ledger.Api (CurrencySymbol)
+import Plutus.V3.Ledger.Api (CurrencySymbol)
 #endif
 
 -- | Parameters available during compilation (therefore not containing any script hashes).
