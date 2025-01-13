@@ -14,7 +14,7 @@ import GHC.Exts (fromList, fromString, toList)
 import PlutusLedgerApi.V1.Value (
   CurrencySymbol (CurrencySymbol),
  )
-import PlutusLedgerApi.V2 (getLedgerBytes)
+import PlutusLedgerApi.V3 (getLedgerBytes)
 import PlutusTx qualified
 import Test.Laws (aesonLawsWith, plutusTxDataLaws)
 import Test.QuickCheck (
