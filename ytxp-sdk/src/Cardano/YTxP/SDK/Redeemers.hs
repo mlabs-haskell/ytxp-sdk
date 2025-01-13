@@ -1,6 +1,11 @@
 {-# OPTIONS_GHC -Wno-missing-local-signatures #-}
 
-module Cardano.YTxP.SDK.Redeemers (AuthorisedScriptIndex (AuthorisedScriptIndex), AuthorisedScriptPurpose (Minting, Spending, Rewarding), AuthorisedScriptProofIndex (AuthorisedScriptProofIndex), YieldingRedeemer (YieldingRedeemer, authorisedScriptIndex, authorisedScriptProofIndex)) where
+module Cardano.YTxP.SDK.Redeemers (
+  AuthorisedScriptIndex (AuthorisedScriptIndex),
+  AuthorisedScriptPurpose (Minting, Spending, Rewarding),
+  AuthorisedScriptProofIndex (AuthorisedScriptProofIndex),
+  YieldingRedeemer (YieldingRedeemer, authorisedScriptIndex, authorisedScriptProofIndex),
+) where
 
 import GHC.Generics (Generic)
 import PlutusTx qualified
