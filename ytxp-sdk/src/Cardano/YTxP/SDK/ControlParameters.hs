@@ -29,6 +29,7 @@ import Data.Proxy (Proxy (Proxy))
 import Data.Text (Text)
 import Data.Text.Encoding qualified as TE
 import GHC.TypeLits (KnownSymbol, Symbol, symbolVal)
+import Prettyprinter (Pretty (pretty), align, braces, punctuate, viaShow, vsep, (<+>))
 
 {- | A helper newtype to ensure that any 'Script's we use are serialized (and
 deserialized), consistently. We also have a \'tag\' for a more specific type
@@ -39,6 +40,9 @@ See @JSON.md@ for an explanation of our policy. TODO: update json policy
 -}
 newtype HexStringScript (scriptLabel :: Symbol) = HexStringScript ShortByteString
   deriving newtype (Eq)
+
+instance Pretty (HexStringScript (scriptLabel :: Symbol)) where
+  pretty (HexStringScript s) = viaShow s
 
 instance ToJSON (HexStringScript scriptLabel) where
   {-# INLINEABLE toJSON #-}
@@ -73,6 +77,14 @@ data YieldingScripts = YieldingScripts
   -- ^ @since 0.1.0
   }
   deriving stock (Eq, Show)
+
+instance Pretty YieldingScripts where
+  pretty YieldingScripts {yieldingMintingPolicies, yieldingValidator, yieldingStakingValidators} =
+    ("YieldingScripts:" <+>) . braces . align . vsep . punctuate "," $
+      [ "yieldingMintingPolicies:" <+> pretty yieldingMintingPolicies
+      , "yieldingValidator:" <+> pretty yieldingValidator
+      , "yieldingStakingValidators:" <+> pretty yieldingStakingValidators
+      ]
 
 -- | @since 0.1.0
 instance ToJSON YieldingScripts where
@@ -137,6 +149,13 @@ instance FromJSON ControlParameters where
     ys <- obj .: "yieldingScripts"
     cpi <- obj .: "sdkParameters"
     pure $ ControlParameters ys cpi
+
+instance Pretty ControlParameters where
+  pretty ControlParameters {yieldingScripts, sdkParameters} =
+    ("ControlParameters:" <+>) . braces . align . vsep . punctuate "," $
+      [ pretty yieldingScripts
+      , pretty sdkParameters
+      ]
 
 -- | Converts a 'ShortByteString' into a textual representation in hex.
 sbsToHexText :: ShortByteString -> Text
