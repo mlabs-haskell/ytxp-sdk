@@ -20,6 +20,8 @@
       packages = {
         ytxp-lib-96 = flake-96.packages."ytxp-sdk:lib:ytxp-sdk";
         ytxp-lib-810 = flake-810.packages."ytxp-sdk:lib:ytxp-sdk";
+        ytxp-lib-96-test = flake-96.packages."ytxp-sdk:test:ytxp-sdk-test";
+        ytxp-lib-810-test = flake-810.packages."ytxp-sdk:test:ytxp-sdk-test";
       };
       inherit (flake-96) devShells;
     };
