@@ -2,12 +2,17 @@
   imports = [
     ./pre-commit.nix
   ];
-  perSystem = { ... }: {
+  perSystem = { lib, config, pkgs, ... }: {
     checks = {
       # TODO add tests
-      # run-TEST_SUITE_NAME-test = pkgs.runCommandNoCC "run-TEST_SUITE_NAME-test" { } ''
-      #   ${lib.getExe config.packages."ytxp-sdk:test:TEST_SUITE_NAME"} && touch $out
-      # '';
+      run-serialization-test-810 = pkgs.runCommandNoCC "run-serialization-test-810" { } ''
+                ${lib.getExe config.packages.ytxp-lib-810-test} && touch $out
+        	'';
+      run-serialization-test-96 = pkgs.runCommandNoCC "run-serialization-test-96" { } ''
+        ${lib.getExe config.packages.ytxp-lib-96-test} && touch $out
+      '';
     };
   };
 }
+
+
