@@ -1,7 +1,25 @@
+{-# OPTIONS_GHC -Wno-deprecations #-}
+
 module Main (main) where
 
-import Cardano.YTxP.SDK.ControlParameters (ControlParameters (ControlParameters), HexStringScript (HexStringScript), YieldingScripts (YieldingScripts, yieldingMintingPolicies, yieldingStakingValidators, yieldingValidator), hexTextToSbs, sbsToHexText)
-import Cardano.YTxP.SDK.Redeemers (AuthorisedScriptIndex (AuthorisedScriptIndex), AuthorisedScriptProofIndex (AuthorisedScriptProofIndex), AuthorisedScriptPurpose (Minting), YieldingRedeemer (YieldingRedeemer))
+import Cardano.YTxP.SDK.ControlParameters (
+  ControlParameters (ControlParameters),
+  HexStringScript (HexStringScript),
+  YieldingScripts (
+    YieldingScripts,
+    yieldingMintingPolicies,
+    yieldingStakingValidators,
+    yieldingValidator
+  ),
+  hexTextToSbs,
+  sbsToHexText,
+ )
+import Cardano.YTxP.SDK.Redeemers (
+  AuthorisedScriptIndex (AuthorisedScriptIndex),
+  AuthorisedScriptProofIndex (AuthorisedScriptProofIndex),
+  AuthorisedScriptPurpose (Minting),
+  YieldingRedeemer (YieldingRedeemer),
+ )
 import Cardano.YTxP.SDK.SdkParameters (
   AuthorisedScriptsSTCS (AuthorisedScriptsSTCS),
   SdkParameters (SdkParameters),
