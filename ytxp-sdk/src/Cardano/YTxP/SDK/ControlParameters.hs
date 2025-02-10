@@ -1,7 +1,11 @@
-{- | Module: Cardano.YTxP.Control.Parameters
-Description: Data required to work with the compiled control scripts
+{- |
+Module      : Cardano.YTxP.Control.Parameters
+Description : Data required to work with the compiled control scripts
+
+This module is consider deprecated. Use Ply instead.
 -}
-module Cardano.YTxP.SDK.ControlParameters (
+module Cardano.YTxP.SDK.ControlParameters
+  {-# DEPRECATED "Use Ply instead." #-} (
   -- * Types
   YieldingScripts (..),
   ControlParameters (..),
