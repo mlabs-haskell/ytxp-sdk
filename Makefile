@@ -24,13 +24,12 @@ usage:
 	@echo "    build_all                                                   -- Build all"
 	@echo ""
 	# Test
+	@echo "    test_all                                                    -- Run all the tests"
+	@echo "    test_all_dev                                                -- Run all the tests ignoring warning"
 	@echo ""
 	# Check Typos
 	@echo "    typos_check                                                 -- Check typos"
 	@echo "    typos_fix                                                   -- Fix typos"
-	@echo ""
-	# Doc
-	@echo "    build_doc                                                   -- Build haddock documentation"
 	@echo ""
 	# Doc
 	@echo "    build_doc                                                   -- Build haddock documentation"
@@ -121,19 +120,23 @@ build_all:
 
 ################################################################################
 # Test
-# .PHONY: test_TODO
-# test_serialization:
-# 	$(CABAL_YTXP_SDK) test -j TODO
+.PHONY: test_all
+test_all:
+	cabal test -j all --test-show-details=always
+
+.PHONY: test_all_dev
+test_all_dev:
+	cabal test -j -fdev all --test-show-details=always
 
 ################################################################################
 # Test
 .PHONY: typos_check
 typos_check :
-	typos -c ../../.typos.toml ../../
+	typos -c ./typos.toml ./
 
 .PHONY: typos_fix
 typos_fix:
-	typos -w -c ../../.typos.toml ../../
+	typos -w -c ./typos.toml ./
 
 ################################################################################
 # Doc
