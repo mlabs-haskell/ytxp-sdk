@@ -1,0 +1,342 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE CPP #-}</span><span>
+</span><span id="line-2"></span><span class="hs-pragma">{-# LANGUAGE ImpredicativeTypes #-}</span><span>
+</span><span id="line-3"></span><span class="hs-pragma">{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}</span><span>
+</span><span id="line-4"></span><span>
+</span><span id="line-5"></span><span class="hs-pragma">{-# HLINT ignore &quot;Use newtype instead of data&quot; #-}</span><span>
+</span><span id="line-6"></span><span>
+</span><span id="line-7"></span><span class="annot"><span class="hs-comment">{- | Module: Cardano.YTxP.Control.Parameters
+Description: Data required to work with the compiled control scripts
+-}</span></span><span>
+</span><span id="line-10"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Cardano.YTxP.SDK.SdkParameters</span><span> </span><span class="hs-special">(</span><span>
+</span><span id="line-11"></span><span>  </span><span class="annot"><a href="Cardano.YTxP.SDK.SdkParameters.html#SdkParameters"><span class="hs-identifier">SdkParameters</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span>
+</span><span id="line-12"></span><span>  </span><span class="annot"><a href="Cardano.YTxP.SDK.SdkParameters.html#AuthorisedScriptsSTCS"><span class="hs-identifier">AuthorisedScriptsSTCS</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span>
+</span><span id="line-13"></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-14"></span><span>
+</span><span id="line-15"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/Control.Monad.html"><span class="hs-identifier">Control.Monad</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/Control.Monad.html#%3C%3D%3C"><span class="hs-operator">(&lt;=&lt;)</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-16"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Aeson</span></span><span> </span><span class="hs-special">(</span><span>
+</span><span id="line-17"></span><span>  </span><span class="annot"><span class="hs-identifier">FromJSON</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">parseJSON</span></span><span class="hs-special">)</span><span class="hs-special">,</span><span>
+</span><span id="line-18"></span><span>  </span><span class="annot"><span class="hs-identifier">ToJSON</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">toEncoding</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">toJSON</span></span><span class="hs-special">)</span><span class="hs-special">,</span><span>
+</span><span id="line-19"></span><span>  </span><span class="annot"><span class="hs-identifier">withText</span></span><span class="hs-special">,</span><span>
+</span><span id="line-20"></span><span> </span><span class="hs-special">)</span><span>
+</span><span id="line-21"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/Data.String.html"><span class="hs-identifier">Data.String</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/Data.String.html#IsString"><span class="hs-identifier">IsString</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/Data.String.html#fromString"><span class="hs-identifier">fromString</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-22"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Text</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">unpack</span></span><span class="hs-special">)</span><span>
+</span><span id="line-23"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/GHC.Generics.html"><span class="hs-identifier">GHC.Generics</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/GHC.Generics.html#Generic"><span class="hs-identifier">Generic</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-24"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/Numeric.Natural.html"><span class="hs-identifier">Numeric.Natural</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../../../ghc-9.6.5/html/libraries/ghc-bignum-1.3/src/GHC.Num.Natural.html#Natural"><span class="hs-identifier">Natural</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-25"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">PlutusCore</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">DefaultUni</span></span><span class="hs-special">)</span><span>
+</span><span id="line-26"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">PlutusTx</span></span><span> </span><span class="hs-keyword">qualified</span><span>
+</span><span id="line-27"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Prettyprinter</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Pretty</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">align</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">braces</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">dquotes</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">pretty</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">punctuate</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">vsep</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-operator">(&lt;+&gt;)</span></span><span class="hs-special">)</span><span class="hs-cpp">
+
+#if MIN_VERSION_plutus_ledger_api(1,1,0)
+</span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">PlutusLedgerApi.V3</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">CurrencySymbol</span></span><span class="hs-special">)</span><span class="hs-cpp">
+#else
+</span><span class="hs-keyword">import</span><span> </span><span class="hs-identifier">Plutus.V3.Ledger.Api</span><span> </span><span class="hs-special">(</span><span class="hs-identifier">CurrencySymbol</span><span class="hs-special">)</span><span class="hs-cpp">
+#endif
+</span><span>
+</span><span id="line-35"></span><span class="annot"><span class="hs-comment">-- | Parameters available during compilation (therefore not containing any script hashes).</span></span><span>
+</span><span id="line-36"></span><span class="hs-keyword">data</span><span> </span><span id="SdkParameters"><span class="annot"><a href="Cardano.YTxP.SDK.SdkParameters.html#SdkParameters"><span class="hs-identifier hs-var">SdkParameters</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="SdkParameters"><span class="annot"><a href="Cardano.YTxP.SDK.SdkParameters.html#SdkParameters"><span class="hs-identifier hs-var">SdkParameters</span></a></span></span><span>
+</span><span id="line-37"></span><span>  </span><span class="hs-special">{</span><span> </span><span id="%24sel%3AstakingValidatorsNonceList%3ASdkParameters"><span class="annot"><span class="annottext">SdkParameters -&gt; [Natural]
+</span><a href="Cardano.YTxP.SDK.SdkParameters.html#%24sel%3AstakingValidatorsNonceList%3ASdkParameters"><span class="hs-identifier hs-var hs-var">stakingValidatorsNonceList</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">[</span><span class="annot"><a href="../../../ghc-9.6.5/html/libraries/ghc-bignum-1.3/src/GHC.Num.Natural.html#Natural"><span class="hs-identifier hs-type">Natural</span></a></span><span class="hs-special">]</span><span>
+</span><span id="line-38"></span><span>  </span><span class="hs-comment">-- ^ A list of nonces for the yielding staking validators. One staking</span><span>
+</span><span id="line-39"></span><span>  </span><span class="hs-comment">-- validator is compiled for each nonce.</span><span>
+</span><span id="line-40"></span><span>  </span><span class="hs-comment">-- @since 0.1.0</span><span>
+</span><span id="line-41"></span><span>  </span><span class="hs-special">,</span><span> </span><span id="%24sel%3AmintingPoliciesNonceList%3ASdkParameters"><span class="annot"><span class="annottext">SdkParameters -&gt; [Natural]
+</span><a href="Cardano.YTxP.SDK.SdkParameters.html#%24sel%3AmintingPoliciesNonceList%3ASdkParameters"><span class="hs-identifier hs-var hs-var">mintingPoliciesNonceList</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">[</span><span class="annot"><a href="../../../ghc-9.6.5/html/libraries/ghc-bignum-1.3/src/GHC.Num.Natural.html#Natural"><span class="hs-identifier hs-type">Natural</span></a></span><span class="hs-special">]</span><span>
+</span><span id="line-42"></span><span>  </span><span class="hs-comment">-- ^ A list of nonces for the yielding minting policies. One minting</span><span>
+</span><span id="line-43"></span><span>  </span><span class="hs-comment">-- policy is compiled for each nonce.</span><span>
+</span><span id="line-44"></span><span>  </span><span class="hs-comment">-- @since 0.1.0</span><span>
+</span><span id="line-45"></span><span>  </span><span class="hs-special">,</span><span> </span><span id="%24sel%3AauthorisedScriptsSTCS%3ASdkParameters"><span class="annot"><span class="annottext">SdkParameters -&gt; AuthorisedScriptsSTCS
+</span><a href="Cardano.YTxP.SDK.SdkParameters.html#%24sel%3AauthorisedScriptsSTCS%3ASdkParameters"><span class="hs-identifier hs-var hs-var">authorisedScriptsSTCS</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.YTxP.SDK.SdkParameters.html#AuthorisedScriptsSTCS"><span class="hs-identifier hs-type">AuthorisedScriptsSTCS</span></a></span><span>
+</span><span id="line-46"></span><span>  </span><span class="hs-comment">-- ^ The Currency symbol of the token that identifies authorised reference scripts .</span><span>
+</span><span id="line-47"></span><span>  </span><span class="hs-comment">-- @since 0.1.0</span><span>
+</span><span id="line-48"></span><span>  </span><span class="hs-special">}</span><span>
+</span><span id="line-49"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">stock</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679181922"><span id="local-6989586621679181930"><span class="annot"><span class="annottext">SdkParameters -&gt; SdkParameters -&gt; Bool
+(SdkParameters -&gt; SdkParameters -&gt; Bool)
+-&gt; (SdkParameters -&gt; SdkParameters -&gt; Bool) -&gt; Eq SdkParameters
+forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
+$c== :: SdkParameters -&gt; SdkParameters -&gt; Bool
+== :: SdkParameters -&gt; SdkParameters -&gt; Bool
+$c/= :: SdkParameters -&gt; SdkParameters -&gt; Bool
+/= :: SdkParameters -&gt; SdkParameters -&gt; Bool
+</span><a href="../../../ghc-9.6.5/html/libraries/ghc-prim-0.10.0/src/GHC.Classes.html#Eq"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></a></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679181936"><span id="local-6989586621679181938"><span class="annot"><span class="annottext">(forall x. SdkParameters -&gt; Rep SdkParameters x)
+-&gt; (forall x. Rep SdkParameters x -&gt; SdkParameters)
+-&gt; Generic SdkParameters
+forall x. Rep SdkParameters x -&gt; SdkParameters
+forall x. SdkParameters -&gt; Rep SdkParameters x
+forall a.
+(forall x. a -&gt; Rep a x) -&gt; (forall x. Rep a x -&gt; a) -&gt; Generic a
+$cfrom :: forall x. SdkParameters -&gt; Rep SdkParameters x
+from :: forall x. SdkParameters -&gt; Rep SdkParameters x
+$cto :: forall x. Rep SdkParameters x -&gt; SdkParameters
+to :: forall x. Rep SdkParameters x -&gt; SdkParameters
+</span><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/GHC.Generics.html#Generic"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Generic</span></a></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679181942"><span id="local-6989586621679181952"><span id="local-6989586621679181956"><span class="annot"><span class="annottext">Int -&gt; SdkParameters -&gt; ShowS
+[SdkParameters] -&gt; ShowS
+SdkParameters -&gt; String
+(Int -&gt; SdkParameters -&gt; ShowS)
+-&gt; (SdkParameters -&gt; String)
+-&gt; ([SdkParameters] -&gt; ShowS)
+-&gt; Show SdkParameters
+forall a.
+(Int -&gt; a -&gt; ShowS) -&gt; (a -&gt; String) -&gt; ([a] -&gt; ShowS) -&gt; Show a
+$cshowsPrec :: Int -&gt; SdkParameters -&gt; ShowS
+showsPrec :: Int -&gt; SdkParameters -&gt; ShowS
+$cshow :: SdkParameters -&gt; String
+show :: SdkParameters -&gt; String
+$cshowList :: [SdkParameters] -&gt; ShowS
+showList :: [SdkParameters] -&gt; ShowS
+</span><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/GHC.Show.html#Show"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></a></span></span></span></span><span class="hs-special">)</span><span>
+</span><span id="line-50"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">anyclass</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679181961"><span id="local-6989586621679181968"><span id="local-6989586621679181971"><span id="local-6989586621679181974"><span id="local-6989586621679181977"><span class="annot"><span class="annottext">[SdkParameters] -&gt; Value
+[SdkParameters] -&gt; Encoding
+SdkParameters -&gt; Bool
+SdkParameters -&gt; Value
+SdkParameters -&gt; Encoding
+(SdkParameters -&gt; Value)
+-&gt; (SdkParameters -&gt; Encoding)
+-&gt; ([SdkParameters] -&gt; Value)
+-&gt; ([SdkParameters] -&gt; Encoding)
+-&gt; (SdkParameters -&gt; Bool)
+-&gt; ToJSON SdkParameters
+forall a.
+(a -&gt; Value)
+-&gt; (a -&gt; Encoding)
+-&gt; ([a] -&gt; Value)
+-&gt; ([a] -&gt; Encoding)
+-&gt; (a -&gt; Bool)
+-&gt; ToJSON a
+$ctoJSON :: SdkParameters -&gt; Value
+toJSON :: SdkParameters -&gt; Value
+$ctoEncoding :: SdkParameters -&gt; Encoding
+toEncoding :: SdkParameters -&gt; Encoding
+$ctoJSONList :: [SdkParameters] -&gt; Value
+toJSONList :: [SdkParameters] -&gt; Value
+$ctoEncodingList :: [SdkParameters] -&gt; Encoding
+toEncodingList :: [SdkParameters] -&gt; Encoding
+$comitField :: SdkParameters -&gt; Bool
+omitField :: SdkParameters -&gt; Bool
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">ToJSON</span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679182095"><span id="local-6989586621679182102"><span id="local-6989586621679182105"><span class="annot"><span class="annottext">Maybe SdkParameters
+Value -&gt; Parser [SdkParameters]
+Value -&gt; Parser SdkParameters
+(Value -&gt; Parser SdkParameters)
+-&gt; (Value -&gt; Parser [SdkParameters])
+-&gt; Maybe SdkParameters
+-&gt; FromJSON SdkParameters
+forall a.
+(Value -&gt; Parser a)
+-&gt; (Value -&gt; Parser [a]) -&gt; Maybe a -&gt; FromJSON a
+$cparseJSON :: Value -&gt; Parser SdkParameters
+parseJSON :: Value -&gt; Parser SdkParameters
+$cparseJSONList :: Value -&gt; Parser [SdkParameters]
+parseJSONList :: Value -&gt; Parser [SdkParameters]
+$comittedField :: Maybe SdkParameters
+omittedField :: Maybe SdkParameters
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">FromJSON</span></span></span></span></span><span class="hs-special">)</span><span>
+</span><span id="line-51"></span><span>
+</span><span id="line-52"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679182185"><span class="annot"><span class="hs-identifier hs-type">Pretty</span></span><span> </span><span class="annot"><a href="Cardano.YTxP.SDK.SdkParameters.html#SdkParameters"><span class="hs-identifier hs-type">SdkParameters</span></a></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-53"></span><span>  </span><span id="local-6989586621679182202"><span class="annot"><span class="annottext">pretty :: forall ann. SdkParameters -&gt; Doc ann
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">pretty</span></span></span><span> </span><span class="annot"><a href="Cardano.YTxP.SDK.SdkParameters.html#SdkParameters"><span class="hs-identifier hs-type">SdkParameters</span></a></span><span> </span><span class="hs-special">{</span><span id="local-6989586621679182203"><span class="annot"><span class="annottext">[Natural]
+$sel:stakingValidatorsNonceList:SdkParameters :: SdkParameters -&gt; [Natural]
+stakingValidatorsNonceList :: [Natural]
+</span><a href="Cardano.YTxP.SDK.SdkParameters.html#%24sel%3AstakingValidatorsNonceList%3ASdkParameters"><span class="hs-identifier hs-var hs-var">stakingValidatorsNonceList</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679182204"><span class="annot"><span class="annottext">[Natural]
+$sel:mintingPoliciesNonceList:SdkParameters :: SdkParameters -&gt; [Natural]
+mintingPoliciesNonceList :: [Natural]
+</span><a href="Cardano.YTxP.SDK.SdkParameters.html#%24sel%3AmintingPoliciesNonceList%3ASdkParameters"><span class="hs-identifier hs-var hs-var">mintingPoliciesNonceList</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679182205"><span class="annot"><span class="annottext">AuthorisedScriptsSTCS
+$sel:authorisedScriptsSTCS:SdkParameters :: SdkParameters -&gt; AuthorisedScriptsSTCS
+authorisedScriptsSTCS :: AuthorisedScriptsSTCS
+</span><a href="Cardano.YTxP.SDK.SdkParameters.html#%24sel%3AauthorisedScriptsSTCS%3ASdkParameters"><span class="hs-identifier hs-var hs-var">authorisedScriptsSTCS</span></a></span></span><span class="hs-special">}</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-54"></span><span>    </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Doc ann
+</span><span class="hs-string">&quot;SdkParameters:&quot;</span></span><span> </span><span class="hs-operator">&lt;+&gt;</span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(Doc ann -&gt; Doc ann)
+-&gt; ([Doc ann] -&gt; Doc ann) -&gt; [Doc ann] -&gt; Doc ann
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/GHC.Base.html#."><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">Doc ann -&gt; Doc ann
+forall ann. Doc ann -&gt; Doc ann
+</span><span class="hs-identifier hs-var">braces</span></span><span> </span><span class="annot"><span class="annottext">(Doc ann -&gt; Doc ann)
+-&gt; ([Doc ann] -&gt; Doc ann) -&gt; [Doc ann] -&gt; Doc ann
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/GHC.Base.html#."><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">Doc ann -&gt; Doc ann
+forall ann. Doc ann -&gt; Doc ann
+</span><span class="hs-identifier hs-var">align</span></span><span> </span><span class="annot"><span class="annottext">(Doc ann -&gt; Doc ann)
+-&gt; ([Doc ann] -&gt; Doc ann) -&gt; [Doc ann] -&gt; Doc ann
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/GHC.Base.html#."><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">[Doc ann] -&gt; Doc ann
+forall ann. [Doc ann] -&gt; Doc ann
+</span><span class="hs-identifier hs-var">vsep</span></span><span> </span><span class="annot"><span class="annottext">([Doc ann] -&gt; Doc ann)
+-&gt; ([Doc ann] -&gt; [Doc ann]) -&gt; [Doc ann] -&gt; Doc ann
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/GHC.Base.html#."><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">Doc ann -&gt; [Doc ann] -&gt; [Doc ann]
+forall ann. Doc ann -&gt; [Doc ann] -&gt; [Doc ann]
+</span><span class="hs-identifier hs-var">punctuate</span></span><span> </span><span class="annot"><span class="annottext">Doc ann
+</span><span class="hs-string">&quot;,&quot;</span></span><span> </span><span class="annot"><span class="annottext">([Doc ann] -&gt; Doc ann) -&gt; [Doc ann] -&gt; Doc ann
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span>
+</span><span id="line-55"></span><span>      </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">Doc ann
+</span><span class="hs-string">&quot;stakingValidatorsNonceList:&quot;</span></span><span> </span><span class="annot"><span class="annottext">Doc ann -&gt; Doc ann -&gt; Doc ann
+forall ann. Doc ann -&gt; Doc ann -&gt; Doc ann
+</span><span class="hs-operator hs-var">&lt;+&gt;</span></span><span> </span><span class="annot"><span class="annottext">[Natural] -&gt; Doc ann
+forall ann. [Natural] -&gt; Doc ann
+forall a ann. Pretty a =&gt; a -&gt; Doc ann
+</span><span class="hs-identifier hs-var">pretty</span></span><span> </span><span class="annot"><span class="annottext">[Natural]
+</span><a href="#local-6989586621679182203"><span class="hs-identifier hs-var">stakingValidatorsNonceList</span></a></span><span>
+</span><span id="line-56"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Doc ann
+</span><span class="hs-string">&quot;mintingPoliciesNonceList:&quot;</span></span><span> </span><span class="annot"><span class="annottext">Doc ann -&gt; Doc ann -&gt; Doc ann
+forall ann. Doc ann -&gt; Doc ann -&gt; Doc ann
+</span><span class="hs-operator hs-var">&lt;+&gt;</span></span><span> </span><span class="annot"><span class="annottext">[Natural] -&gt; Doc ann
+forall ann. [Natural] -&gt; Doc ann
+forall a ann. Pretty a =&gt; a -&gt; Doc ann
+</span><span class="hs-identifier hs-var">pretty</span></span><span> </span><span class="annot"><span class="annottext">[Natural]
+</span><a href="#local-6989586621679182204"><span class="hs-identifier hs-var">mintingPoliciesNonceList</span></a></span><span>
+</span><span id="line-57"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Doc ann
+</span><span class="hs-string">&quot;authorisedScriptsSTCS:&quot;</span></span><span> </span><span class="annot"><span class="annottext">Doc ann -&gt; Doc ann -&gt; Doc ann
+forall ann. Doc ann -&gt; Doc ann -&gt; Doc ann
+</span><span class="hs-operator hs-var">&lt;+&gt;</span></span><span> </span><span class="annot"><span class="annottext">Doc ann -&gt; Doc ann
+forall ann. Doc ann -&gt; Doc ann
+</span><span class="hs-identifier hs-var">dquotes</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AuthorisedScriptsSTCS -&gt; Doc ann
+forall a ann. Pretty a =&gt; a -&gt; Doc ann
+forall ann. AuthorisedScriptsSTCS -&gt; Doc ann
+</span><span class="hs-identifier hs-var">pretty</span></span><span> </span><span class="annot"><span class="annottext">AuthorisedScriptsSTCS
+</span><a href="#local-6989586621679182205"><span class="hs-identifier hs-var">authorisedScriptsSTCS</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-58"></span><span>      </span><span class="hs-special">]</span><span>
+</span><span id="line-59"></span><span>
+</span><span id="line-60"></span><span class="annot"><span class="hs-comment">-- | Semantic newtype for the YieldList state thread currency symbol</span></span><span>
+</span><span id="line-61"></span><span class="hs-keyword">newtype</span><span> </span><span id="AuthorisedScriptsSTCS"><span class="annot"><a href="Cardano.YTxP.SDK.SdkParameters.html#AuthorisedScriptsSTCS"><span class="hs-identifier hs-var">AuthorisedScriptsSTCS</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="AuthorisedScriptsSTCS"><span class="annot"><a href="Cardano.YTxP.SDK.SdkParameters.html#AuthorisedScriptsSTCS"><span class="hs-identifier hs-var">AuthorisedScriptsSTCS</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">CurrencySymbol</span></span><span>
+</span><span id="line-62"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">newtype</span></span><span>
+</span><span id="line-63"></span><span>    </span><span class="hs-special">(</span><span> </span><span id="local-6989586621679182209"><span id="local-6989586621679182214"><span class="annot"><span class="annottext">AuthorisedScriptsSTCS -&gt; AuthorisedScriptsSTCS -&gt; Bool
+(AuthorisedScriptsSTCS -&gt; AuthorisedScriptsSTCS -&gt; Bool)
+-&gt; (AuthorisedScriptsSTCS -&gt; AuthorisedScriptsSTCS -&gt; Bool)
+-&gt; Eq AuthorisedScriptsSTCS
+forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
+$c== :: AuthorisedScriptsSTCS -&gt; AuthorisedScriptsSTCS -&gt; Bool
+== :: AuthorisedScriptsSTCS -&gt; AuthorisedScriptsSTCS -&gt; Bool
+$c/= :: AuthorisedScriptsSTCS -&gt; AuthorisedScriptsSTCS -&gt; Bool
+/= :: AuthorisedScriptsSTCS -&gt; AuthorisedScriptsSTCS -&gt; Bool
+</span><a href="../../../ghc-9.6.5/html/libraries/ghc-prim-0.10.0/src/GHC.Classes.html#Eq"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></a></span></span></span><span>
+</span><span id="line-64"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679182218"><span class="annot"><span class="annottext">String -&gt; AuthorisedScriptsSTCS
+(String -&gt; AuthorisedScriptsSTCS) -&gt; IsString AuthorisedScriptsSTCS
+forall a. (String -&gt; a) -&gt; IsString a
+$cfromString :: String -&gt; AuthorisedScriptsSTCS
+fromString :: String -&gt; AuthorisedScriptsSTCS
+</span><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/Data.String.html#IsString"><span class="hs-identifier hs-var hs-var hs-var hs-var">IsString</span></a></span></span><span>
+</span><span id="line-65"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679182225"><span id="local-6989586621679182230"><span id="local-6989586621679182234"><span class="annot"><span class="annottext">Int -&gt; AuthorisedScriptsSTCS -&gt; ShowS
+[AuthorisedScriptsSTCS] -&gt; ShowS
+AuthorisedScriptsSTCS -&gt; String
+(Int -&gt; AuthorisedScriptsSTCS -&gt; ShowS)
+-&gt; (AuthorisedScriptsSTCS -&gt; String)
+-&gt; ([AuthorisedScriptsSTCS] -&gt; ShowS)
+-&gt; Show AuthorisedScriptsSTCS
+forall a.
+(Int -&gt; a -&gt; ShowS) -&gt; (a -&gt; String) -&gt; ([a] -&gt; ShowS) -&gt; Show a
+$cshowsPrec :: Int -&gt; AuthorisedScriptsSTCS -&gt; ShowS
+showsPrec :: Int -&gt; AuthorisedScriptsSTCS -&gt; ShowS
+$cshow :: AuthorisedScriptsSTCS -&gt; String
+show :: AuthorisedScriptsSTCS -&gt; String
+$cshowList :: [AuthorisedScriptsSTCS] -&gt; ShowS
+showList :: [AuthorisedScriptsSTCS] -&gt; ShowS
+</span><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/GHC.Show.html#Show"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></a></span></span></span></span><span>
+</span><span id="line-66"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679182238"><span class="annot"><span class="annottext">AuthorisedScriptsSTCS -&gt; BuiltinData
+(AuthorisedScriptsSTCS -&gt; BuiltinData)
+-&gt; ToData AuthorisedScriptsSTCS
+forall a. (a -&gt; BuiltinData) -&gt; ToData a
+$ctoBuiltinData :: AuthorisedScriptsSTCS -&gt; BuiltinData
+toBuiltinData :: AuthorisedScriptsSTCS -&gt; BuiltinData
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">PlutusTx.ToData</span></span></span><span>
+</span><span id="line-67"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679182245"><span class="annot"><span class="annottext">BuiltinData -&gt; Maybe AuthorisedScriptsSTCS
+(BuiltinData -&gt; Maybe AuthorisedScriptsSTCS)
+-&gt; FromData AuthorisedScriptsSTCS
+forall a. (BuiltinData -&gt; Maybe a) -&gt; FromData a
+$cfromBuiltinData :: BuiltinData -&gt; Maybe AuthorisedScriptsSTCS
+fromBuiltinData :: BuiltinData -&gt; Maybe AuthorisedScriptsSTCS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">PlutusTx.FromData</span></span></span><span>
+</span><span id="line-68"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679182252"><span class="annot"><span class="annottext">BuiltinData -&gt; AuthorisedScriptsSTCS
+(BuiltinData -&gt; AuthorisedScriptsSTCS)
+-&gt; UnsafeFromData AuthorisedScriptsSTCS
+forall a. (BuiltinData -&gt; a) -&gt; UnsafeFromData a
+$cunsafeFromBuiltinData :: BuiltinData -&gt; AuthorisedScriptsSTCS
+unsafeFromBuiltinData :: BuiltinData -&gt; AuthorisedScriptsSTCS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">PlutusTx.UnsafeFromData</span></span></span><span>
+</span><span id="line-69"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679182259"><span class="annot"><span class="hs-identifier hs-type">PlutusTx.Typeable</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">DefaultUni</span></span></span><span>
+</span><span id="line-70"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679182266"><span class="annot"><span class="hs-identifier hs-type">PlutusTx.Lift</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">DefaultUni</span></span></span><span>
+</span><span id="line-71"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679182273"><span id="local-6989586621679182278"><span class="annot"><span class="annottext">(forall ann. AuthorisedScriptsSTCS -&gt; Doc ann)
+-&gt; (forall ann. [AuthorisedScriptsSTCS] -&gt; Doc ann)
+-&gt; Pretty AuthorisedScriptsSTCS
+forall ann. [AuthorisedScriptsSTCS] -&gt; Doc ann
+forall ann. AuthorisedScriptsSTCS -&gt; Doc ann
+forall a.
+(forall ann. a -&gt; Doc ann)
+-&gt; (forall ann. [a] -&gt; Doc ann) -&gt; Pretty a
+$cpretty :: forall ann. AuthorisedScriptsSTCS -&gt; Doc ann
+pretty :: forall ann. AuthorisedScriptsSTCS -&gt; Doc ann
+$cprettyList :: forall ann. [AuthorisedScriptsSTCS] -&gt; Doc ann
+prettyList :: forall ann. [AuthorisedScriptsSTCS] -&gt; Doc ann
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Pretty</span></span></span></span><span>
+</span><span id="line-72"></span><span>    </span><span class="hs-special">)</span><span>
+</span><span id="line-73"></span><span>
+</span><span id="line-74"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679182283"><span id="local-6989586621679182286"><span class="annot"><span class="hs-identifier hs-type">FromJSON</span></span><span> </span><span class="annot"><a href="Cardano.YTxP.SDK.SdkParameters.html#AuthorisedScriptsSTCS"><span class="hs-identifier hs-type">AuthorisedScriptsSTCS</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-75"></span><span>  </span><span class="hs-pragma">{-# INLINEABLE</span><span> </span><span class="annot"><span class="hs-pragma hs-type">parseJSON</span></span><span> </span><span class="hs-pragma">#-}</span><span>
+</span><span id="line-76"></span><span>  </span><span id="local-6989586621679182297"><span class="annot"><span class="annottext">parseJSON :: Value -&gt; Parser AuthorisedScriptsSTCS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">parseJSON</span></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-77"></span><span>    </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AuthorisedScriptsSTCS -&gt; Parser AuthorisedScriptsSTCS
+forall a. a -&gt; Parser a
+forall (f :: Type -&gt; Type) a. Applicative f =&gt; a -&gt; f a
+</span><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/GHC.Base.html#pure"><span class="hs-identifier hs-var">pure</span></a></span><span> </span><span class="annot"><span class="annottext">(AuthorisedScriptsSTCS -&gt; Parser AuthorisedScriptsSTCS)
+-&gt; (CurrencySymbol -&gt; AuthorisedScriptsSTCS)
+-&gt; CurrencySymbol
+-&gt; Parser AuthorisedScriptsSTCS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/GHC.Base.html#."><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">CurrencySymbol -&gt; AuthorisedScriptsSTCS
+</span><a href="Cardano.YTxP.SDK.SdkParameters.html#AuthorisedScriptsSTCS"><span class="hs-identifier hs-var">AuthorisedScriptsSTCS</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-78"></span><span>      </span><span class="annot"><span class="annottext">(CurrencySymbol -&gt; Parser AuthorisedScriptsSTCS)
+-&gt; (Value -&gt; Parser CurrencySymbol)
+-&gt; Value
+-&gt; Parser AuthorisedScriptsSTCS
+forall (m :: Type -&gt; Type) b c a.
+Monad m =&gt;
+(b -&gt; m c) -&gt; (a -&gt; m b) -&gt; a -&gt; m c
+</span><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/Control.Monad.html#%3C%3D%3C"><span class="hs-operator hs-var">&lt;=&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">String
+-&gt; (Text -&gt; Parser CurrencySymbol)
+-&gt; Value
+-&gt; Parser CurrencySymbol
+forall a. String -&gt; (Text -&gt; Parser a) -&gt; Value -&gt; Parser a
+</span><span class="hs-identifier hs-var">withText</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;AuthorisedScriptsSTCS&quot;</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CurrencySymbol -&gt; Parser CurrencySymbol
+forall a. a -&gt; Parser a
+forall (f :: Type -&gt; Type) a. Applicative f =&gt; a -&gt; f a
+</span><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/GHC.Base.html#pure"><span class="hs-identifier hs-var">pure</span></a></span><span> </span><span class="annot"><span class="annottext">(CurrencySymbol -&gt; Parser CurrencySymbol)
+-&gt; (Text -&gt; CurrencySymbol) -&gt; Text -&gt; Parser CurrencySymbol
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/GHC.Base.html#."><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; CurrencySymbol
+forall a. IsString a =&gt; String -&gt; a
+</span><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/Data.String.html#fromString"><span class="hs-identifier hs-var">fromString</span></a></span><span> </span><span class="annot"><span class="annottext">(String -&gt; CurrencySymbol)
+-&gt; (Text -&gt; String) -&gt; Text -&gt; CurrencySymbol
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/GHC.Base.html#."><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">Text -&gt; String
+</span><span class="hs-identifier hs-var">unpack</span></span><span class="hs-special">)</span><span>
+</span><span id="line-79"></span><span>
+</span><span id="line-80"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679182301"><span id="local-6989586621679182304"><span id="local-6989586621679182307"><span class="annot"><span class="hs-identifier hs-type">ToJSON</span></span><span> </span><span class="annot"><a href="Cardano.YTxP.SDK.SdkParameters.html#AuthorisedScriptsSTCS"><span class="hs-identifier hs-type">AuthorisedScriptsSTCS</span></a></span></span></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-81"></span><span>  </span><span class="hs-pragma">{-# INLINEABLE</span><span> </span><span class="annot"><span class="hs-pragma hs-type">toJSON</span></span><span> </span><span class="hs-pragma">#-}</span><span>
+</span><span id="line-82"></span><span>  </span><span id="local-6989586621679182313"><span class="annot"><span class="annottext">toJSON :: AuthorisedScriptsSTCS -&gt; Value
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">toJSON</span></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.YTxP.SDK.SdkParameters.html#AuthorisedScriptsSTCS"><span class="hs-identifier hs-type">AuthorisedScriptsSTCS</span></a></span><span> </span><span id="local-6989586621679182314"><span class="annot"><span class="annottext">CurrencySymbol
+</span><a href="#local-6989586621679182314"><span class="hs-identifier hs-var">cs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String -&gt; Value
+forall a. ToJSON a =&gt; a -&gt; Value
+</span><span class="hs-identifier hs-var">toJSON</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; Value)
+-&gt; (CurrencySymbol -&gt; String) -&gt; CurrencySymbol -&gt; Value
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/GHC.Base.html#."><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">CurrencySymbol -&gt; String
+forall a. Show a =&gt; a -&gt; String
+</span><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/GHC.Show.html#show"><span class="hs-identifier hs-var">show</span></a></span><span> </span><span class="annot"><span class="annottext">(CurrencySymbol -&gt; Value) -&gt; CurrencySymbol -&gt; Value
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">CurrencySymbol
+</span><a href="#local-6989586621679182314"><span class="hs-identifier hs-var">cs</span></a></span><span>
+</span><span id="line-83"></span><span>
+</span><span id="line-84"></span><span>  </span><span class="hs-pragma">{-# INLINEABLE</span><span> </span><span class="annot"><span class="hs-pragma hs-type">toEncoding</span></span><span> </span><span class="hs-pragma">#-}</span><span>
+</span><span id="line-85"></span><span>  </span><span id="local-6989586621679182319"><span class="annot"><span class="annottext">toEncoding :: AuthorisedScriptsSTCS -&gt; Encoding
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">toEncoding</span></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.YTxP.SDK.SdkParameters.html#AuthorisedScriptsSTCS"><span class="hs-identifier hs-type">AuthorisedScriptsSTCS</span></a></span><span> </span><span id="local-6989586621679182320"><span class="annot"><span class="annottext">CurrencySymbol
+</span><a href="#local-6989586621679182320"><span class="hs-identifier hs-var">cs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String -&gt; Encoding
+forall a. ToJSON a =&gt; a -&gt; Encoding
+</span><span class="hs-identifier hs-var">toEncoding</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; Encoding)
+-&gt; (CurrencySymbol -&gt; String) -&gt; CurrencySymbol -&gt; Encoding
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/GHC.Base.html#."><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">CurrencySymbol -&gt; String
+forall a. Show a =&gt; a -&gt; String
+</span><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/GHC.Show.html#show"><span class="hs-identifier hs-var">show</span></a></span><span> </span><span class="annot"><span class="annottext">(CurrencySymbol -&gt; Encoding) -&gt; CurrencySymbol -&gt; Encoding
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../../../ghc-9.6.5/html/libraries/base-4.18.2.1/src/GHC.Base.html#%24"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">CurrencySymbol
+</span><a href="#local-6989586621679182320"><span class="hs-identifier hs-var">cs</span></a></span><span>
+</span><span id="line-86"></span></pre></body></html>
