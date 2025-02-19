@@ -12,6 +12,13 @@
     };
     git-hooks.url = "github:cachix/git-hooks.nix";
     flake-root.url = "github:srid/flake-root";
+
+    hercules-ci-effects = {
+      url = "github:mlabs-haskell/hercules-ci-effects/push-cache-effect";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
   };
 
   outputs = inputs:
@@ -23,6 +30,7 @@
         ./nix/pre-commit.nix
         ./nix/packages.nix
         ./nix/checks.nix
+        ./nix/gh-pages.nix
       ];
     };
 }
