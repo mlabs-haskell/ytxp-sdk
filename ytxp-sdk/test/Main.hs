@@ -29,10 +29,7 @@ import Data.Aeson (encode)
 import Data.ByteString.Short (ShortByteString)
 import Data.Text (unpack)
 import GHC.Exts (fromList, fromString, toList)
-import PlutusLedgerApi.V1.Value (
-  CurrencySymbol (CurrencySymbol),
- )
-import PlutusLedgerApi.V3 (getLedgerBytes)
+import PlutusLedgerApi.V3 (CurrencySymbol (CurrencySymbol), getLedgerBytes)
 import PlutusTx qualified
 import Test.Laws (aesonLawsWith, plutusTxDataLaws)
 import Test.QuickCheck (
