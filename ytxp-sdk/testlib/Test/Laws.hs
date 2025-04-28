@@ -55,13 +55,26 @@ aesonLawsWith gen shr =
 
 plutusTxDataLaws ::
   forall (a :: Type).
-  (Typeable a, PlutusTx.ToData a, PlutusTx.FromData a, PlutusTx.UnsafeFromData a, Arbitrary a, Show a, Eq a) =>
+  ( Typeable a
+  , PlutusTx.ToData a
+  , PlutusTx.FromData a
+  , PlutusTx.UnsafeFromData a
+  , Arbitrary a
+  , Show a
+  , Eq a
+  ) =>
   TestTree
 plutusTxDataLaws = plutusTxDataLawsWith @a arbitrary shrink
 
 plutusTxDataLawsWith ::
   forall (a :: Type).
-  (Typeable a, PlutusTx.ToData a, PlutusTx.FromData a, PlutusTx.UnsafeFromData a, Eq a, Show a) =>
+  ( Typeable a
+  , PlutusTx.ToData a
+  , PlutusTx.FromData a
+  , PlutusTx.UnsafeFromData a
+  , Eq a
+  , Show a
+  ) =>
   Gen a ->
   (a -> [a]) ->
   TestTree

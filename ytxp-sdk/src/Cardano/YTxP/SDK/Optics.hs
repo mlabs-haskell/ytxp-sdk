@@ -2,7 +2,11 @@
 
 module Cardano.YTxP.SDK.Optics (HasYieldingRedeemer (..)) where
 
-import Cardano.YTxP.SDK.Redeemers (AuthorisedScriptIndex, AuthorisedScriptProofIndex, YieldingRedeemer)
+import Cardano.YTxP.SDK.Redeemers (
+  AuthorisedScriptIndex,
+  AuthorisedScriptProofIndex,
+  YieldingRedeemer,
+ )
 
 import Control.Lens (makeClassyFor, makeWrapped)
 

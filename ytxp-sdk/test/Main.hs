@@ -66,11 +66,15 @@ main =
     , goldenVsString
         "AuthorisedScriptPurpose"
         "goldens/AuthorisedScriptPurpose.golden"
-        (pure . fromString . show . PlutusTx.toBuiltinData $ sampleAuthorisedScriptPurpose)
+        ( pure . fromString . show . PlutusTx.toBuiltinData $
+            sampleAuthorisedScriptPurpose
+        )
     , goldenVsString
         "AuthorisedScriptProofIndex"
         "goldens/AuthorisedScriptProofIndex.golden"
-        (pure . fromString . show . PlutusTx.toBuiltinData $ sampleAuthorisedScriptProofIndex)
+        ( pure . fromString . show . PlutusTx.toBuiltinData $
+            sampleAuthorisedScriptProofIndex
+        )
     , goldenVsString
         "YieldingRedeemer"
         "goldens/YieldingRedeemer.golden"
