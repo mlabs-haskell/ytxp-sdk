@@ -1,5 +1,3 @@
-{-# OPTIONS_GHC -Wno-missing-local-signatures #-}
-
 module Cardano.YTxP.SDK.Redeemers (
   AuthorisedScriptIndex (AuthorisedScriptIndex),
   AuthorisedScriptPurpose (Minting, Spending, Rewarding),
@@ -12,6 +10,7 @@ module Cardano.YTxP.SDK.Redeemers (
 ) where
 
 import GHC.Generics (Generic)
+import Generics.SOP qualified as SOP
 import PlutusTx qualified
 import PlutusTx.Prelude qualified as PlutusTx
 import Test.QuickCheck (Arbitrary (arbitrary), arbitraryBoundedEnum)
@@ -32,6 +31,7 @@ newtype AuthorisedScriptIndex = AuthorisedScriptIndex Integer
 -}
 data AuthorisedScriptPurpose = Minting | Spending | Rewarding
   deriving stock (Show, Generic, Eq, Enum, Bounded)
+  deriving anyclass (SOP.Generic)
 
 instance Arbitrary AuthorisedScriptPurpose where
   arbitrary = arbitraryBoundedEnum

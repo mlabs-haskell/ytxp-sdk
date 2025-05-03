@@ -108,6 +108,7 @@ library
     , base
     , base16-bytestring
     , bytestring
+    , generics-sop
     , lens
     , plutus-core
     , plutus-ledger-api
