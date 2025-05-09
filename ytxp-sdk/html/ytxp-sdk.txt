@@ -71,10 +71,10 @@ instance PlutusTx.IsData.Class.UnsafeFromData Cardano.YTxP.SDK.Redeemers.Authori
 instance PlutusTx.Eq.Eq Cardano.YTxP.SDK.Redeemers.AuthorisedScriptPurpose
 
 module Cardano.YTxP.SDK.Optics
-class HasYieldingRedeemer c_arVr
-yieldingRedeemer :: HasYieldingRedeemer c_arVr => Lens' c_arVr YieldingRedeemer
-authorisedScriptIndex :: HasYieldingRedeemer c_arVr => Lens' c_arVr AuthorisedScriptIndex
-authorisedScriptProofIndex :: HasYieldingRedeemer c_arVr => Lens' c_arVr AuthorisedScriptProofIndex
+class HasYieldingRedeemer c_atEZ
+yieldingRedeemer :: HasYieldingRedeemer c_atEZ => Lens' c_atEZ YieldingRedeemer
+authorisedScriptIndex :: HasYieldingRedeemer c_atEZ => Lens' c_atEZ AuthorisedScriptIndex
+authorisedScriptProofIndex :: HasYieldingRedeemer c_atEZ => Lens' c_atEZ AuthorisedScriptProofIndex
 instance Cardano.YTxP.SDK.Optics.HasYieldingRedeemer Cardano.YTxP.SDK.Redeemers.YieldingRedeemer
 instance forall t. ((Cardano.YTxP.SDK.Redeemers.AuthorisedScriptIndex :: GHC.Types.Type) GHC.Types.~ (t :: GHC.Types.Type)) => Control.Lens.Wrapped.Rewrapped Cardano.YTxP.SDK.Redeemers.AuthorisedScriptIndex t
 instance Control.Lens.Wrapped.Wrapped Cardano.YTxP.SDK.Redeemers.AuthorisedScriptIndex
@@ -111,7 +111,6 @@ instance PlutusTx.IsData.Class.UnsafeFromData Cardano.YTxP.SDK.SdkParameters.Aut
 instance PlutusTx.IsData.Class.FromData Cardano.YTxP.SDK.SdkParameters.AuthorisedScriptsSTCS
 instance PlutusTx.IsData.Class.ToData Cardano.YTxP.SDK.SdkParameters.AuthorisedScriptsSTCS
 instance GHC.Show.Show Cardano.YTxP.SDK.SdkParameters.AuthorisedScriptsSTCS
-instance Data.String.IsString Cardano.YTxP.SDK.SdkParameters.AuthorisedScriptsSTCS
 instance GHC.Classes.Eq Cardano.YTxP.SDK.SdkParameters.AuthorisedScriptsSTCS
 instance Data.Aeson.Types.FromJSON.FromJSON Cardano.YTxP.SDK.SdkParameters.SdkParameters
 instance Data.Aeson.Types.ToJSON.ToJSON Cardano.YTxP.SDK.SdkParameters.SdkParameters
