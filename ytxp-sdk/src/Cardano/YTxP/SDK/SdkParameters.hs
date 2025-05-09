@@ -18,19 +18,23 @@ import Data.Aeson (
   ToJSON (toEncoding, toJSON),
   withText,
  )
-import Data.String (IsString, fromString)
 import Data.Text (unpack)
 import GHC.Generics (Generic)
 import Numeric.Natural (Natural)
 import PlutusCore (DefaultUni)
+import PlutusLedgerApi.V3 (CurrencySymbol (CurrencySymbol))
 import PlutusTx qualified
-import Prettyprinter (Pretty, align, braces, dquotes, pretty, punctuate, vsep, (<+>))
-
-#if MIN_VERSION_plutus_ledger_api(1,1,0)
-import PlutusLedgerApi.V3 (CurrencySymbol)
-#else
-import Plutus.V3.Ledger.Api (CurrencySymbol)
-#endif
+import PlutusTx.Builtins.HasOpaque (stringToBuiltinByteStringHex)
+import Prettyprinter (
+  Pretty,
+  align,
+  braces,
+  dquotes,
+  pretty,
+  punctuate,
+  vsep,
+  (<+>),
+ )
 
 -- | Parameters available during compilation (therefore not containing any script hashes).
 data SdkParameters = SdkParameters
@@ -50,18 +54,22 @@ data SdkParameters = SdkParameters
   deriving anyclass (ToJSON, FromJSON)
 
 instance Pretty SdkParameters where
-  pretty SdkParameters {stakingValidatorsNonceList, mintingPoliciesNonceList, authorisedScriptsSTCS} =
-    ("SdkParameters:" <+>) . braces . align . vsep . punctuate "," $
-      [ "stakingValidatorsNonceList:" <+> pretty stakingValidatorsNonceList
-      , "mintingPoliciesNonceList:" <+> pretty mintingPoliciesNonceList
-      , "authorisedScriptsSTCS:" <+> dquotes (pretty authorisedScriptsSTCS)
-      ]
+  pretty
+    SdkParameters
+      { stakingValidatorsNonceList
+      , mintingPoliciesNonceList
+      , authorisedScriptsSTCS
+      } =
+      ("SdkParameters:" <+>) . braces . align . vsep . punctuate "," $
+        [ "stakingValidatorsNonceList:" <+> pretty stakingValidatorsNonceList
+        , "mintingPoliciesNonceList:" <+> pretty mintingPoliciesNonceList
+        , "authorisedScriptsSTCS:" <+> dquotes (pretty authorisedScriptsSTCS)
+        ]
 
 -- | Semantic newtype for the YieldList state thread currency symbol
 newtype AuthorisedScriptsSTCS = AuthorisedScriptsSTCS CurrencySymbol
   deriving newtype
     ( Eq
-    , IsString
     , Show
     , PlutusTx.ToData
     , PlutusTx.FromData
@@ -75,7 +83,9 @@ instance FromJSON AuthorisedScriptsSTCS where
   {-# INLINEABLE parseJSON #-}
   parseJSON =
     (pure . AuthorisedScriptsSTCS)
-      <=< withText "AuthorisedScriptsSTCS" (pure . fromString . unpack)
+      <=< withText
+        "AuthorisedScriptsSTCS"
+        (pure . CurrencySymbol . stringToBuiltinByteStringHex . unpack)
 
 instance ToJSON AuthorisedScriptsSTCS where
   {-# INLINEABLE toJSON #-}

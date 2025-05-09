@@ -2,7 +2,11 @@ module Cardano.YTxP.SDK.Redeemers (
   AuthorisedScriptIndex (AuthorisedScriptIndex),
   AuthorisedScriptPurpose (Minting, Spending, Rewarding),
   AuthorisedScriptProofIndex (AuthorisedScriptProofIndex),
-  YieldingRedeemer (YieldingRedeemer, authorisedScriptIndex, authorisedScriptProofIndex),
+  YieldingRedeemer (
+    YieldingRedeemer,
+    authorisedScriptIndex,
+    authorisedScriptProofIndex
+  ),
 ) where
 
 import GHC.Generics (Generic)
@@ -13,7 +17,15 @@ import Test.QuickCheck (Arbitrary (arbitrary), arbitraryBoundedEnum)
 
 -- | Represents an index into a authorised reference script in a TxInReferenceInput list
 newtype AuthorisedScriptIndex = AuthorisedScriptIndex Integer
-  deriving newtype (Show, Eq, PlutusTx.ToData, PlutusTx.FromData, PlutusTx.UnsafeFromData, PlutusTx.Eq, Arbitrary)
+  deriving newtype
+    ( Show
+    , Eq
+    , PlutusTx.ToData
+    , PlutusTx.FromData
+    , PlutusTx.UnsafeFromData
+    , PlutusTx.Eq
+    , Arbitrary
+    )
 
 {- The type of yielded to scripts
 -}
@@ -60,8 +72,17 @@ instance PlutusTx.Eq AuthorisedScriptPurpose where
 
 {- Index for the yielding redeemer
 -}
-newtype AuthorisedScriptProofIndex = AuthorisedScriptProofIndex (AuthorisedScriptPurpose, Integer)
-  deriving newtype (Show, Eq, PlutusTx.ToData, PlutusTx.FromData, PlutusTx.UnsafeFromData, PlutusTx.Eq, Arbitrary)
+newtype AuthorisedScriptProofIndex
+  = AuthorisedScriptProofIndex (AuthorisedScriptPurpose, Integer)
+  deriving newtype
+    ( Show
+    , Eq
+    , PlutusTx.ToData
+    , PlutusTx.FromData
+    , PlutusTx.UnsafeFromData
+    , PlutusTx.Eq
+    , Arbitrary
+    )
 
 {- | The redeemer passed to the yielding minting policy, validator,
 and staking validators

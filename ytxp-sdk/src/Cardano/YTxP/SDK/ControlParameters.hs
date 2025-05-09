@@ -33,7 +33,15 @@ import Data.Proxy (Proxy (Proxy))
 import Data.Text (Text)
 import Data.Text.Encoding qualified as TE
 import GHC.TypeLits (KnownSymbol, Symbol, symbolVal)
-import Prettyprinter (Pretty (pretty), align, braces, punctuate, viaShow, vsep, (<+>))
+import Prettyprinter (
+  Pretty (pretty),
+  align,
+  braces,
+  punctuate,
+  viaShow,
+  vsep,
+  (<+>),
+ )
 
 {- | A helper newtype to ensure that any 'Script's we use are serialized (and
 deserialized), consistently. We also have a \'tag\' for a more specific type
@@ -83,12 +91,17 @@ data YieldingScripts = YieldingScripts
   deriving stock (Eq, Show)
 
 instance Pretty YieldingScripts where
-  pretty YieldingScripts {yieldingMintingPolicies, yieldingValidator, yieldingStakingValidators} =
-    ("YieldingScripts:" <+>) . braces . align . vsep . punctuate "," $
-      [ "yieldingMintingPolicies:" <+> pretty yieldingMintingPolicies
-      , "yieldingValidator:" <+> pretty yieldingValidator
-      , "yieldingStakingValidators:" <+> pretty yieldingStakingValidators
-      ]
+  pretty
+    YieldingScripts
+      { yieldingMintingPolicies
+      , yieldingValidator
+      , yieldingStakingValidators
+      } =
+      ("YieldingScripts:" <+>) . braces . align . vsep . punctuate "," $
+        [ "yieldingMintingPolicies:" <+> pretty yieldingMintingPolicies
+        , "yieldingValidator:" <+> pretty yieldingValidator
+        , "yieldingStakingValidators:" <+> pretty yieldingStakingValidators
+        ]
 
 -- | @since 0.1.0
 instance ToJSON YieldingScripts where
@@ -105,9 +118,9 @@ instance ToJSON YieldingScripts where
       "yieldingMintingPolicies"
         .= yieldingMintingPolicies ys
         <> "yieldingValidator"
-        .= yieldingValidator ys
+          .= yieldingValidator ys
         <> "yieldingStakingValidators"
-        .= yieldingStakingValidators ys
+          .= yieldingStakingValidators ys
 
 -- | @since 0.1.0
 instance FromJSON YieldingScripts where
@@ -145,7 +158,7 @@ instance ToJSON ControlParameters where
       "yieldingScripts"
         .= yieldingScripts cp
         <> "sdkParameters"
-        .= sdkParameters cp
+          .= sdkParameters cp
 
 instance FromJSON ControlParameters where
   {-# INLINEABLE parseJSON #-}
