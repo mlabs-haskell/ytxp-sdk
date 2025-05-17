@@ -46,6 +46,18 @@ data SdkParameters = SdkParameters
   -- ^ A list of nonces for the yielding minting policies. One minting
   -- policy is compiled for each nonce.
   -- @since 0.1.0
+  , certifyingValidatorsNonceList :: [Natural]
+  -- ^ A list of nonces for the certifying staking validators. One certifying
+  -- validator is compiled for each nonce.
+  -- @since 0.2.0
+  , votingValidatorsNonceList :: [Natural]
+  -- ^ A list of nonces for the voting staking validators. One voting
+  -- validator is compiled for each nonce.
+  -- @since 0.2.0
+  , proposingValidatorsNonceList :: [Natural]
+  -- ^ A list of nonces for the proposing staking validators. One proposing
+  -- validator is compiled for each nonce.
+  -- @since 0.2.0
   , authorisedScriptsSTCS :: AuthorisedScriptsSTCS
   -- ^ The Currency symbol of the token that identifies authorised reference scripts .
   -- @since 0.1.0
@@ -58,11 +70,17 @@ instance Pretty SdkParameters where
     SdkParameters
       { stakingValidatorsNonceList
       , mintingPoliciesNonceList
+      , certifyingValidatorsNonceList
+      , votingValidatorsNonceList
+      , proposingValidatorsNonceList
       , authorisedScriptsSTCS
       } =
       ("SdkParameters:" <+>) . braces . align . vsep . punctuate "," $
         [ "stakingValidatorsNonceList:" <+> pretty stakingValidatorsNonceList
         , "mintingPoliciesNonceList:" <+> pretty mintingPoliciesNonceList
+        , "certifyingValidatorsNonceList:" <+> pretty certifyingValidatorsNonceList
+        , "votingValidatorsNonceList:" <+> pretty votingValidatorsNonceList
+        , "proposingValidatorsNonceList:" <+> pretty proposingValidatorsNonceList
         , "authorisedScriptsSTCS:" <+> dquotes (pretty authorisedScriptsSTCS)
         ]
 
