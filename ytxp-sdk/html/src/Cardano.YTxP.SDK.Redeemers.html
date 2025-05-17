@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span id="local-6989586621679201180"><span id="local-6989586621679201181"></span></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Cardano.YTxP.SDK.Redeemers</span><span> </span><span class="hs-special">(</span><span>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span id="local-6989586621679204863"><span id="local-6989586621679204864"></span></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Cardano.YTxP.SDK.Redeemers</span><span> </span><span class="hs-special">(</span><span>
 </span><span id="line-2"></span><span>  </span><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#AuthorisedScriptIndex"><span class="hs-identifier">AuthorisedScriptIndex</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#AuthorisedScriptIndex"><span class="hs-identifier">AuthorisedScriptIndex</span></a></span><span class="hs-special">)</span><span class="hs-special">,</span><span>
 </span><span id="line-3"></span><span>  </span><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#AuthorisedScriptPurpose"><span class="hs-identifier">AuthorisedScriptPurpose</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#Minting"><span class="hs-identifier">Minting</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#Spending"><span class="hs-identifier">Spending</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#Rewarding"><span class="hs-identifier">Rewarding</span></a></span><span class="hs-special">)</span><span class="hs-special">,</span><span>
 </span><span id="line-4"></span><span>  </span><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#AuthorisedScriptProofIndex"><span class="hs-identifier">AuthorisedScriptProofIndex</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#AuthorisedScriptProofIndex"><span class="hs-identifier">AuthorisedScriptProofIndex</span></a></span><span class="hs-special">)</span><span class="hs-special">,</span><span>
@@ -18,7 +18,7 @@
 </span><span id="line-18"></span><span class="annot"><span class="hs-comment">-- | Represents an index into a authorised reference script in a TxInReferenceInput list</span></span><span>
 </span><span id="line-19"></span><span class="hs-keyword">newtype</span><span> </span><span id="AuthorisedScriptIndex"><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#AuthorisedScriptIndex"><span class="hs-identifier hs-var">AuthorisedScriptIndex</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="AuthorisedScriptIndex"><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#AuthorisedScriptIndex"><span class="hs-identifier hs-var">AuthorisedScriptIndex</span></a></span></span><span> </span><span class="annot"><a href="../../../ghc-9.6.7/html/libraries/ghc-bignum-1.3/src/GHC.Num.Integer.html#Integer"><span class="hs-identifier hs-type">Integer</span></a></span><span>
 </span><span id="line-20"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">newtype</span></span><span>
-</span><span id="line-21"></span><span>    </span><span class="hs-special">(</span><span> </span><span id="local-6989586621679201193"><span id="local-6989586621679201198"><span id="local-6989586621679201202"><span class="annot"><span class="annottext">Int -&gt; AuthorisedScriptIndex -&gt; ShowS
+</span><span id="line-21"></span><span>    </span><span class="hs-special">(</span><span> </span><span id="local-6989586621679204876"><span id="local-6989586621679204881"><span id="local-6989586621679204885"><span class="annot"><span class="annottext">Int -&gt; AuthorisedScriptIndex -&gt; ShowS
 [AuthorisedScriptIndex] -&gt; ShowS
 AuthorisedScriptIndex -&gt; String
 (Int -&gt; AuthorisedScriptIndex -&gt; ShowS)
@@ -34,7 +34,7 @@ show :: AuthorisedScriptIndex -&gt; String
 $cshowList :: [AuthorisedScriptIndex] -&gt; ShowS
 showList :: [AuthorisedScriptIndex] -&gt; ShowS
 </span><a href="../../../ghc-9.6.7/html/libraries/base-4.18.3.0/src/GHC.Show.html#Show"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></a></span></span></span></span><span>
-</span><span id="line-22"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679201208"><span id="local-6989586621679201213"><span class="annot"><span class="annottext">AuthorisedScriptIndex -&gt; AuthorisedScriptIndex -&gt; Bool
+</span><span id="line-22"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679204891"><span id="local-6989586621679204896"><span class="annot"><span class="annottext">AuthorisedScriptIndex -&gt; AuthorisedScriptIndex -&gt; Bool
 (AuthorisedScriptIndex -&gt; AuthorisedScriptIndex -&gt; Bool)
 -&gt; (AuthorisedScriptIndex -&gt; AuthorisedScriptIndex -&gt; Bool)
 -&gt; Eq AuthorisedScriptIndex
@@ -44,35 +44,35 @@ $c== :: AuthorisedScriptIndex -&gt; AuthorisedScriptIndex -&gt; Bool
 $c/= :: AuthorisedScriptIndex -&gt; AuthorisedScriptIndex -&gt; Bool
 /= :: AuthorisedScriptIndex -&gt; AuthorisedScriptIndex -&gt; Bool
 </span><a href="../../../ghc-9.6.7/html/libraries/ghc-prim-0.10.0/src/GHC.Classes.html#Eq"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></a></span></span></span><span>
-</span><span id="line-23"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679201219"><span class="annot"><span class="annottext">AuthorisedScriptIndex -&gt; BuiltinData
+</span><span id="line-23"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679204902"><span class="annot"><span class="annottext">AuthorisedScriptIndex -&gt; BuiltinData
 (AuthorisedScriptIndex -&gt; BuiltinData)
 -&gt; ToData AuthorisedScriptIndex
 forall a. (a -&gt; BuiltinData) -&gt; ToData a
 $ctoBuiltinData :: AuthorisedScriptIndex -&gt; BuiltinData
 toBuiltinData :: AuthorisedScriptIndex -&gt; BuiltinData
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">PlutusTx.ToData</span></span></span><span>
-</span><span id="line-24"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679201226"><span class="annot"><span class="annottext">BuiltinData -&gt; Maybe AuthorisedScriptIndex
+</span><span id="line-24"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679204909"><span class="annot"><span class="annottext">BuiltinData -&gt; Maybe AuthorisedScriptIndex
 (BuiltinData -&gt; Maybe AuthorisedScriptIndex)
 -&gt; FromData AuthorisedScriptIndex
 forall a. (BuiltinData -&gt; Maybe a) -&gt; FromData a
 $cfromBuiltinData :: BuiltinData -&gt; Maybe AuthorisedScriptIndex
 fromBuiltinData :: BuiltinData -&gt; Maybe AuthorisedScriptIndex
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">PlutusTx.FromData</span></span></span><span>
-</span><span id="line-25"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679201233"><span class="annot"><span class="annottext">BuiltinData -&gt; AuthorisedScriptIndex
+</span><span id="line-25"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679204916"><span class="annot"><span class="annottext">BuiltinData -&gt; AuthorisedScriptIndex
 (BuiltinData -&gt; AuthorisedScriptIndex)
 -&gt; UnsafeFromData AuthorisedScriptIndex
 forall a. (BuiltinData -&gt; a) -&gt; UnsafeFromData a
 $cunsafeFromBuiltinData :: BuiltinData -&gt; AuthorisedScriptIndex
 unsafeFromBuiltinData :: BuiltinData -&gt; AuthorisedScriptIndex
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">PlutusTx.UnsafeFromData</span></span></span><span>
-</span><span id="line-26"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679201240"><span class="annot"><span class="annottext">AuthorisedScriptIndex -&gt; AuthorisedScriptIndex -&gt; Bool
+</span><span id="line-26"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679204923"><span class="annot"><span class="annottext">AuthorisedScriptIndex -&gt; AuthorisedScriptIndex -&gt; Bool
 (AuthorisedScriptIndex -&gt; AuthorisedScriptIndex -&gt; Bool)
 -&gt; Eq AuthorisedScriptIndex
 forall a. (a -&gt; a -&gt; Bool) -&gt; Eq a
 $c== :: AuthorisedScriptIndex -&gt; AuthorisedScriptIndex -&gt; Bool
 == :: AuthorisedScriptIndex -&gt; AuthorisedScriptIndex -&gt; Bool
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">PlutusTx.Eq</span></span></span><span>
-</span><span id="line-27"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679201247"><span id="local-6989586621679201252"><span class="annot"><span class="annottext">Gen AuthorisedScriptIndex
+</span><span id="line-27"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679204930"><span id="local-6989586621679204935"><span class="annot"><span class="annottext">Gen AuthorisedScriptIndex
 Gen AuthorisedScriptIndex
 -&gt; (AuthorisedScriptIndex -&gt; [AuthorisedScriptIndex])
 -&gt; Arbitrary AuthorisedScriptIndex
@@ -88,7 +88,7 @@ shrink :: AuthorisedScriptIndex -&gt; [AuthorisedScriptIndex]
 </span><span id="line-30"></span><span class="hs-comment">{- The type of yielded to scripts
 -}</span><span>
 </span><span id="line-32"></span><span class="hs-keyword">data</span><span> </span><span id="AuthorisedScriptPurpose"><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#AuthorisedScriptPurpose"><span class="hs-identifier hs-var">AuthorisedScriptPurpose</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="Minting"><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#Minting"><span class="hs-identifier hs-var">Minting</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span id="Spending"><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#Spending"><span class="hs-identifier hs-var">Spending</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span id="Rewarding"><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#Rewarding"><span class="hs-identifier hs-var">Rewarding</span></a></span></span><span>
-</span><span id="line-33"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">stock</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679201258"><span id="local-6989586621679201260"><span id="local-6989586621679201264"><span class="annot"><span class="annottext">Int -&gt; AuthorisedScriptPurpose -&gt; ShowS
+</span><span id="line-33"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">stock</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679204941"><span id="local-6989586621679204943"><span id="local-6989586621679204947"><span class="annot"><span class="annottext">Int -&gt; AuthorisedScriptPurpose -&gt; ShowS
 [AuthorisedScriptPurpose] -&gt; ShowS
 AuthorisedScriptPurpose -&gt; String
 (Int -&gt; AuthorisedScriptPurpose -&gt; ShowS)
@@ -103,7 +103,7 @@ $cshow :: AuthorisedScriptPurpose -&gt; String
 show :: AuthorisedScriptPurpose -&gt; String
 $cshowList :: [AuthorisedScriptPurpose] -&gt; ShowS
 showList :: [AuthorisedScriptPurpose] -&gt; ShowS
-</span><a href="../../../ghc-9.6.7/html/libraries/base-4.18.3.0/src/GHC.Show.html#Show"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></a></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679201267"><span id="local-6989586621679201269"><span class="annot"><span class="annottext">(forall x.
+</span><a href="../../../ghc-9.6.7/html/libraries/base-4.18.3.0/src/GHC.Show.html#Show"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></a></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679204950"><span id="local-6989586621679204952"><span class="annot"><span class="annottext">(forall x.
  AuthorisedScriptPurpose -&gt; Rep AuthorisedScriptPurpose x)
 -&gt; (forall x.
     Rep AuthorisedScriptPurpose x -&gt; AuthorisedScriptPurpose)
@@ -116,7 +116,7 @@ $cfrom :: forall x. AuthorisedScriptPurpose -&gt; Rep AuthorisedScriptPurpose x
 from :: forall x. AuthorisedScriptPurpose -&gt; Rep AuthorisedScriptPurpose x
 $cto :: forall x. Rep AuthorisedScriptPurpose x -&gt; AuthorisedScriptPurpose
 to :: forall x. Rep AuthorisedScriptPurpose x -&gt; AuthorisedScriptPurpose
-</span><a href="../../../ghc-9.6.7/html/libraries/base-4.18.3.0/src/GHC.Generics.html#Generic"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Generic</span></a></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679201273"><span id="local-6989586621679201275"><span class="annot"><span class="annottext">AuthorisedScriptPurpose -&gt; AuthorisedScriptPurpose -&gt; Bool
+</span><a href="../../../ghc-9.6.7/html/libraries/base-4.18.3.0/src/GHC.Generics.html#Generic"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Generic</span></a></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679204956"><span id="local-6989586621679204958"><span class="annot"><span class="annottext">AuthorisedScriptPurpose -&gt; AuthorisedScriptPurpose -&gt; Bool
 (AuthorisedScriptPurpose -&gt; AuthorisedScriptPurpose -&gt; Bool)
 -&gt; (AuthorisedScriptPurpose -&gt; AuthorisedScriptPurpose -&gt; Bool)
 -&gt; Eq AuthorisedScriptPurpose
@@ -125,7 +125,7 @@ $c== :: AuthorisedScriptPurpose -&gt; AuthorisedScriptPurpose -&gt; Bool
 == :: AuthorisedScriptPurpose -&gt; AuthorisedScriptPurpose -&gt; Bool
 $c/= :: AuthorisedScriptPurpose -&gt; AuthorisedScriptPurpose -&gt; Bool
 /= :: AuthorisedScriptPurpose -&gt; AuthorisedScriptPurpose -&gt; Bool
-</span><a href="../../../ghc-9.6.7/html/libraries/ghc-prim-0.10.0/src/GHC.Classes.html#Eq"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></a></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679201279"><span id="local-6989586621679201287"><span id="local-6989586621679201293"><span id="local-6989586621679201307"><span id="local-6989586621679201309"><span id="local-6989586621679201313"><span id="local-6989586621679201317"><span id="local-6989586621679201321"><span class="annot"><span class="annottext">Int -&gt; AuthorisedScriptPurpose
+</span><a href="../../../ghc-9.6.7/html/libraries/ghc-prim-0.10.0/src/GHC.Classes.html#Eq"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></a></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679204962"><span id="local-6989586621679204970"><span id="local-6989586621679204976"><span id="local-6989586621679204990"><span id="local-6989586621679204992"><span id="local-6989586621679204996"><span id="local-6989586621679205000"><span id="local-6989586621679205004"><span class="annot"><span class="annottext">Int -&gt; AuthorisedScriptPurpose
 AuthorisedScriptPurpose -&gt; Int
 AuthorisedScriptPurpose -&gt; [AuthorisedScriptPurpose]
 AuthorisedScriptPurpose -&gt; AuthorisedScriptPurpose
@@ -185,7 +185,7 @@ enumFromThenTo :: AuthorisedScriptPurpose
 -&gt; AuthorisedScriptPurpose
 -&gt; AuthorisedScriptPurpose
 -&gt; [AuthorisedScriptPurpose]
-</span><a href="../../../ghc-9.6.7/html/libraries/base-4.18.3.0/src/GHC.Enum.html#Enum"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Enum</span></a></span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679201325"><span id="local-6989586621679201327"><span class="annot"><span class="annottext">AuthorisedScriptPurpose
+</span><a href="../../../ghc-9.6.7/html/libraries/base-4.18.3.0/src/GHC.Enum.html#Enum"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Enum</span></a></span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679205008"><span id="local-6989586621679205010"><span class="annot"><span class="annottext">AuthorisedScriptPurpose
 AuthorisedScriptPurpose
 -&gt; AuthorisedScriptPurpose -&gt; Bounded AuthorisedScriptPurpose
 forall a. a -&gt; a -&gt; Bounded a
@@ -194,7 +194,7 @@ minBound :: AuthorisedScriptPurpose
 $cmaxBound :: AuthorisedScriptPurpose
 maxBound :: AuthorisedScriptPurpose
 </span><a href="../../../ghc-9.6.7/html/libraries/base-4.18.3.0/src/GHC.Enum.html#Bounded"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Bounded</span></a></span></span></span><span class="hs-special">)</span><span>
-</span><span id="line-34"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">anyclass</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679201334"><span id="local-6989586621679201343"><span class="annot"><span class="annottext">All @[Type] (SListI @Type) (Code AuthorisedScriptPurpose)
+</span><span id="line-34"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">anyclass</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679205017"><span id="local-6989586621679205026"><span class="annot"><span class="annottext">All @[Type] (SListI @Type) (Code AuthorisedScriptPurpose)
 All @[Type] (SListI @Type) (Code AuthorisedScriptPurpose) =&gt;
 (AuthorisedScriptPurpose -&gt; Rep AuthorisedScriptPurpose)
 -&gt; (Rep AuthorisedScriptPurpose -&gt; AuthorisedScriptPurpose)
@@ -210,8 +210,8 @@ $cto :: Rep AuthorisedScriptPurpose -&gt; AuthorisedScriptPurpose
 to :: Rep AuthorisedScriptPurpose -&gt; AuthorisedScriptPurpose
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var">SOP.Generic</span></span></span></span><span class="hs-special">)</span><span>
 </span><span id="line-35"></span><span>
-</span><span id="line-36"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679201379"><span class="annot"><span class="hs-identifier hs-type">Arbitrary</span></span><span> </span><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#AuthorisedScriptPurpose"><span class="hs-identifier hs-type">AuthorisedScriptPurpose</span></a></span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-37"></span><span>  </span><span id="local-6989586621679201384"><span class="annot"><span class="annottext">arbitrary :: Gen AuthorisedScriptPurpose
+</span><span id="line-36"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679205062"><span class="annot"><span class="hs-identifier hs-type">Arbitrary</span></span><span> </span><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#AuthorisedScriptPurpose"><span class="hs-identifier hs-type">AuthorisedScriptPurpose</span></a></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-37"></span><span>  </span><span id="local-6989586621679205067"><span class="annot"><span class="annottext">arbitrary :: Gen AuthorisedScriptPurpose
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">arbitrary</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Gen AuthorisedScriptPurpose
 forall a. (Bounded a, Enum a) =&gt; Gen a
 </span><span class="hs-identifier hs-var">arbitraryBoundedEnum</span></span><span>
@@ -220,7 +220,7 @@ forall a. (Bounded a, Enum a) =&gt; Gen a
 </span><span id="line-40"></span><span class="hs-comment">-- that uses the fact that a type is an enum to encode it directly with integers onchain</span><span>
 </span><span id="line-41"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">PlutusTx.ToData</span></span><span> </span><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#AuthorisedScriptPurpose"><span class="hs-identifier hs-type">AuthorisedScriptPurpose</span></a></span><span> </span><span class="hs-keyword">where</span><span>
 </span><span id="line-42"></span><span>  </span><span class="hs-pragma">{-# INLINEABLE</span><span> </span><span class="annot"><span class="hs-pragma hs-type">toBuiltinData</span></span><span> </span><span class="hs-pragma">#-}</span><span>
-</span><span id="line-43"></span><span>  </span><span id="local-6989586621679201392"><span class="annot"><span class="annottext">toBuiltinData :: AuthorisedScriptPurpose -&gt; BuiltinData
+</span><span id="line-43"></span><span>  </span><span id="local-6989586621679205075"><span class="annot"><span class="annottext">toBuiltinData :: AuthorisedScriptPurpose -&gt; BuiltinData
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">toBuiltinData</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Integer -&gt; BuiltinData
 forall a. ToData a =&gt; a -&gt; BuiltinData
 </span><span class="hs-identifier hs-var">PlutusTx.toBuiltinData</span></span><span> </span><span class="annot"><span class="annottext">(Integer -&gt; BuiltinData)
@@ -241,19 +241,19 @@ forall a. Enum a =&gt; a -&gt; Int
 </span><span id="line-44"></span><span>
 </span><span id="line-45"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">PlutusTx.FromData</span></span><span> </span><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#AuthorisedScriptPurpose"><span class="hs-identifier hs-type">AuthorisedScriptPurpose</span></a></span><span> </span><span class="hs-keyword">where</span><span>
 </span><span id="line-46"></span><span>  </span><span class="hs-pragma">{-# INLINEABLE</span><span> </span><span class="annot"><span class="hs-pragma hs-type">fromBuiltinData</span></span><span> </span><span class="hs-pragma">#-}</span><span>
-</span><span id="line-47"></span><span>  </span><span id="local-6989586621679201406"><span class="annot"><span class="annottext">fromBuiltinData :: BuiltinData -&gt; Maybe AuthorisedScriptPurpose
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">fromBuiltinData</span></span></span><span> </span><span id="local-6989586621679201407"><span class="annot"><span class="annottext">BuiltinData
-</span><a href="#local-6989586621679201407"><span class="hs-identifier hs-var">d</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">forall a. FromData a =&gt; BuiltinData -&gt; Maybe a
+</span><span id="line-47"></span><span>  </span><span id="local-6989586621679205089"><span class="annot"><span class="annottext">fromBuiltinData :: BuiltinData -&gt; Maybe AuthorisedScriptPurpose
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">fromBuiltinData</span></span></span><span> </span><span id="local-6989586621679205090"><span class="annot"><span class="annottext">BuiltinData
+</span><a href="#local-6989586621679205090"><span class="hs-identifier hs-var">d</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">forall a. FromData a =&gt; BuiltinData -&gt; Maybe a
 </span><span class="hs-identifier hs-var">PlutusTx.fromBuiltinData</span></span><span> </span><span class="hs-glyph">@</span><span class="annot"><a href="../../../ghc-9.6.7/html/libraries/ghc-bignum-1.3/src/GHC.Num.Integer.html#Integer"><span class="hs-identifier hs-type">Integer</span></a></span><span> </span><span class="annot"><span class="annottext">BuiltinData
-</span><a href="#local-6989586621679201407"><span class="hs-identifier hs-var">d</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><a href="#local-6989586621679205090"><span class="hs-identifier hs-var">d</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-48"></span><span>    </span><span class="annot"><span class="annottext">Maybe Integer
 </span><a href="../../../ghc-9.6.7/html/libraries/base-4.18.3.0/src/GHC.Maybe.html#Nothing"><span class="hs-identifier hs-var">PlutusTx.Nothing</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe AuthorisedScriptPurpose
 forall a. Maybe a
 </span><a href="../../../ghc-9.6.7/html/libraries/base-4.18.3.0/src/GHC.Maybe.html#Nothing"><span class="hs-identifier hs-var">PlutusTx.Nothing</span></a></span><span>
-</span><span id="line-49"></span><span>    </span><span class="annot"><a href="../../../ghc-9.6.7/html/libraries/base-4.18.3.0/src/GHC.Maybe.html#Just"><span class="hs-identifier hs-type">PlutusTx.Just</span></a></span><span> </span><span id="local-6989586621679201408"><span class="annot"><span class="annottext">Integer
-</span><a href="#local-6989586621679201408"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-49"></span><span>    </span><span class="annot"><a href="../../../ghc-9.6.7/html/libraries/base-4.18.3.0/src/GHC.Maybe.html#Just"><span class="hs-identifier hs-type">PlutusTx.Just</span></a></span><span> </span><span id="local-6989586621679205091"><span class="annot"><span class="annottext">Integer
+</span><a href="#local-6989586621679205091"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-50"></span><span>      </span><span class="hs-keyword">if</span><span> </span><span class="annot"><span class="annottext">Integer
-</span><a href="#local-6989586621679201408"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Integer -&gt; Integer -&gt; Bool
+</span><a href="#local-6989586621679205091"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Integer -&gt; Integer -&gt; Bool
 forall a. Eq a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">PlutusTx.==</span></span><span> </span><span class="annot"><span class="annottext">Integer
 </span><span class="hs-number">0</span></span><span>
@@ -263,7 +263,7 @@ forall a. a -&gt; Maybe a
 </span><a href="Cardano.YTxP.SDK.Redeemers.html#Minting"><span class="hs-identifier hs-var">Minting</span></a></span><span>
 </span><span id="line-52"></span><span>        </span><span class="hs-keyword">else</span><span>
 </span><span id="line-53"></span><span>          </span><span class="hs-keyword">if</span><span> </span><span class="annot"><span class="annottext">Integer
-</span><a href="#local-6989586621679201408"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Integer -&gt; Integer -&gt; Bool
+</span><a href="#local-6989586621679205091"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Integer -&gt; Integer -&gt; Bool
 forall a. Eq a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">PlutusTx.==</span></span><span> </span><span class="annot"><span class="annottext">Integer
 </span><span class="hs-number">1</span></span><span>
@@ -273,7 +273,7 @@ forall a. a -&gt; Maybe a
 </span><a href="Cardano.YTxP.SDK.Redeemers.html#Spending"><span class="hs-identifier hs-var">Spending</span></a></span><span>
 </span><span id="line-55"></span><span>            </span><span class="hs-keyword">else</span><span>
 </span><span id="line-56"></span><span>              </span><span class="hs-keyword">if</span><span> </span><span class="annot"><span class="annottext">Integer
-</span><a href="#local-6989586621679201408"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Integer -&gt; Integer -&gt; Bool
+</span><a href="#local-6989586621679205091"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Integer -&gt; Integer -&gt; Bool
 forall a. Eq a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">PlutusTx.==</span></span><span> </span><span class="annot"><span class="annottext">Integer
 </span><span class="hs-number">2</span></span><span>
@@ -287,24 +287,24 @@ forall a. Maybe a
 </span><span id="line-59"></span><span>
 </span><span id="line-60"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">PlutusTx.UnsafeFromData</span></span><span> </span><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#AuthorisedScriptPurpose"><span class="hs-identifier hs-type">AuthorisedScriptPurpose</span></a></span><span> </span><span class="hs-keyword">where</span><span>
 </span><span id="line-61"></span><span>  </span><span class="hs-pragma">{-# INLINEABLE</span><span> </span><span class="annot"><span class="hs-pragma hs-type">unsafeFromBuiltinData</span></span><span> </span><span class="hs-pragma">#-}</span><span>
-</span><span id="line-62"></span><span>  </span><span id="local-6989586621679201414"><span class="annot"><span class="annottext">unsafeFromBuiltinData :: BuiltinData -&gt; AuthorisedScriptPurpose
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">unsafeFromBuiltinData</span></span></span><span> </span><span id="local-6989586621679201415"><span class="annot"><span class="annottext">BuiltinData
-</span><a href="#local-6989586621679201415"><span class="hs-identifier hs-var">d</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">BuiltinData -&gt; Maybe AuthorisedScriptPurpose
+</span><span id="line-62"></span><span>  </span><span id="local-6989586621679205097"><span class="annot"><span class="annottext">unsafeFromBuiltinData :: BuiltinData -&gt; AuthorisedScriptPurpose
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">unsafeFromBuiltinData</span></span></span><span> </span><span id="local-6989586621679205098"><span class="annot"><span class="annottext">BuiltinData
+</span><a href="#local-6989586621679205098"><span class="hs-identifier hs-var">d</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">BuiltinData -&gt; Maybe AuthorisedScriptPurpose
 forall a. FromData a =&gt; BuiltinData -&gt; Maybe a
 </span><span class="hs-identifier hs-var">PlutusTx.fromBuiltinData</span></span><span> </span><span class="annot"><span class="annottext">BuiltinData
-</span><a href="#local-6989586621679201415"><span class="hs-identifier hs-var">d</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><a href="#local-6989586621679205098"><span class="hs-identifier hs-var">d</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-63"></span><span>    </span><span class="annot"><span class="annottext">Maybe AuthorisedScriptPurpose
 </span><a href="../../../ghc-9.6.7/html/libraries/base-4.18.3.0/src/GHC.Maybe.html#Nothing"><span class="hs-identifier hs-var">Nothing</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">() -&gt; AuthorisedScriptPurpose
 forall a. () -&gt; a
 </span><span class="hs-identifier hs-var">PlutusTx.error</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
-</span><span id="line-64"></span><span>    </span><span class="annot"><a href="../../../ghc-9.6.7/html/libraries/base-4.18.3.0/src/GHC.Maybe.html#Just"><span class="hs-identifier hs-type">Just</span></a></span><span> </span><span id="local-6989586621679201417"><span class="annot"><span class="annottext">AuthorisedScriptPurpose
-</span><a href="#local-6989586621679201417"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">AuthorisedScriptPurpose
-</span><a href="#local-6989586621679201417"><span class="hs-identifier hs-var">i</span></a></span><span>
+</span><span id="line-64"></span><span>    </span><span class="annot"><a href="../../../ghc-9.6.7/html/libraries/base-4.18.3.0/src/GHC.Maybe.html#Just"><span class="hs-identifier hs-type">Just</span></a></span><span> </span><span id="local-6989586621679205100"><span class="annot"><span class="annottext">AuthorisedScriptPurpose
+</span><a href="#local-6989586621679205100"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">AuthorisedScriptPurpose
+</span><a href="#local-6989586621679205100"><span class="hs-identifier hs-var">i</span></a></span><span>
 </span><span id="line-65"></span><span>
 </span><span id="line-66"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">PlutusTx.Eq</span></span><span> </span><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#AuthorisedScriptPurpose"><span class="hs-identifier hs-type">AuthorisedScriptPurpose</span></a></span><span> </span><span class="hs-keyword">where</span><span>
 </span><span id="line-67"></span><span>  </span><span class="hs-pragma">{-# INLINEABLE</span><span> </span><span class="hs-pragma">(</span><span class="hs-pragma">==</span><span class="hs-pragma">)</span><span> </span><span class="hs-pragma">#-}</span><span>
 </span><span id="line-68"></span><span>  </span><span class="annot"><span class="annottext">AuthorisedScriptPurpose
-</span><a href="Cardano.YTxP.SDK.Redeemers.html#Minting"><span class="hs-identifier hs-var">Minting</span></a></span><span> </span><span id="local-6989586621679201420"><span class="annot"><span class="annottext">== :: AuthorisedScriptPurpose -&gt; AuthorisedScriptPurpose -&gt; Bool
+</span><a href="Cardano.YTxP.SDK.Redeemers.html#Minting"><span class="hs-identifier hs-var">Minting</span></a></span><span> </span><span id="local-6989586621679205103"><span class="annot"><span class="annottext">== :: AuthorisedScriptPurpose -&gt; AuthorisedScriptPurpose -&gt; Bool
 </span><span class="hs-operator hs-var hs-var hs-var hs-var">==</span></span></span><span> </span><span class="annot"><span class="annottext">AuthorisedScriptPurpose
 </span><a href="Cardano.YTxP.SDK.Redeemers.html#Minting"><span class="hs-identifier hs-var">Minting</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><a href="../../../ghc-9.6.7/html/libraries/ghc-prim-0.10.0/src/GHC.Types.html#True"><span class="hs-identifier hs-var">True</span></a></span><span>
@@ -326,7 +326,7 @@ forall a. () -&gt; a
 </span><span id="line-75"></span><span class="hs-keyword">newtype</span><span> </span><span id="AuthorisedScriptProofIndex"><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#AuthorisedScriptProofIndex"><span class="hs-identifier hs-var">AuthorisedScriptProofIndex</span></a></span></span><span>
 </span><span id="line-76"></span><span>  </span><span class="hs-glyph">=</span><span> </span><span id="AuthorisedScriptProofIndex"><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#AuthorisedScriptProofIndex"><span class="hs-identifier hs-var">AuthorisedScriptProofIndex</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#AuthorisedScriptPurpose"><span class="hs-identifier hs-type">AuthorisedScriptPurpose</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="../../../ghc-9.6.7/html/libraries/ghc-bignum-1.3/src/GHC.Num.Integer.html#Integer"><span class="hs-identifier hs-type">Integer</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-77"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">newtype</span></span><span>
-</span><span id="line-78"></span><span>    </span><span class="hs-special">(</span><span> </span><span id="local-6989586621679201422"><span id="local-6989586621679201429"><span id="local-6989586621679201435"><span class="annot"><span class="annottext">Int -&gt; AuthorisedScriptProofIndex -&gt; ShowS
+</span><span id="line-78"></span><span>    </span><span class="hs-special">(</span><span> </span><span id="local-6989586621679205105"><span id="local-6989586621679205112"><span id="local-6989586621679205118"><span class="annot"><span class="annottext">Int -&gt; AuthorisedScriptProofIndex -&gt; ShowS
 [AuthorisedScriptProofIndex] -&gt; ShowS
 AuthorisedScriptProofIndex -&gt; String
 (Int -&gt; AuthorisedScriptProofIndex -&gt; ShowS)
@@ -342,7 +342,7 @@ show :: AuthorisedScriptProofIndex -&gt; String
 $cshowList :: [AuthorisedScriptProofIndex] -&gt; ShowS
 showList :: [AuthorisedScriptProofIndex] -&gt; ShowS
 </span><a href="../../../ghc-9.6.7/html/libraries/base-4.18.3.0/src/GHC.Show.html#Show"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></a></span></span></span></span><span>
-</span><span id="line-79"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679201442"><span id="local-6989586621679201449"><span class="annot"><span class="annottext">AuthorisedScriptProofIndex -&gt; AuthorisedScriptProofIndex -&gt; Bool
+</span><span id="line-79"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679205125"><span id="local-6989586621679205132"><span class="annot"><span class="annottext">AuthorisedScriptProofIndex -&gt; AuthorisedScriptProofIndex -&gt; Bool
 (AuthorisedScriptProofIndex -&gt; AuthorisedScriptProofIndex -&gt; Bool)
 -&gt; (AuthorisedScriptProofIndex
     -&gt; AuthorisedScriptProofIndex -&gt; Bool)
@@ -353,35 +353,35 @@ $c== :: AuthorisedScriptProofIndex -&gt; AuthorisedScriptProofIndex -&gt; Bool
 $c/= :: AuthorisedScriptProofIndex -&gt; AuthorisedScriptProofIndex -&gt; Bool
 /= :: AuthorisedScriptProofIndex -&gt; AuthorisedScriptProofIndex -&gt; Bool
 </span><a href="../../../ghc-9.6.7/html/libraries/ghc-prim-0.10.0/src/GHC.Classes.html#Eq"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></a></span></span></span><span>
-</span><span id="line-80"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679201456"><span class="annot"><span class="annottext">AuthorisedScriptProofIndex -&gt; BuiltinData
+</span><span id="line-80"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679205139"><span class="annot"><span class="annottext">AuthorisedScriptProofIndex -&gt; BuiltinData
 (AuthorisedScriptProofIndex -&gt; BuiltinData)
 -&gt; ToData AuthorisedScriptProofIndex
 forall a. (a -&gt; BuiltinData) -&gt; ToData a
 $ctoBuiltinData :: AuthorisedScriptProofIndex -&gt; BuiltinData
 toBuiltinData :: AuthorisedScriptProofIndex -&gt; BuiltinData
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">PlutusTx.ToData</span></span></span><span>
-</span><span id="line-81"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679201464"><span class="annot"><span class="annottext">BuiltinData -&gt; Maybe AuthorisedScriptProofIndex
+</span><span id="line-81"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679205147"><span class="annot"><span class="annottext">BuiltinData -&gt; Maybe AuthorisedScriptProofIndex
 (BuiltinData -&gt; Maybe AuthorisedScriptProofIndex)
 -&gt; FromData AuthorisedScriptProofIndex
 forall a. (BuiltinData -&gt; Maybe a) -&gt; FromData a
 $cfromBuiltinData :: BuiltinData -&gt; Maybe AuthorisedScriptProofIndex
 fromBuiltinData :: BuiltinData -&gt; Maybe AuthorisedScriptProofIndex
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">PlutusTx.FromData</span></span></span><span>
-</span><span id="line-82"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679201472"><span class="annot"><span class="annottext">BuiltinData -&gt; AuthorisedScriptProofIndex
+</span><span id="line-82"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679205155"><span class="annot"><span class="annottext">BuiltinData -&gt; AuthorisedScriptProofIndex
 (BuiltinData -&gt; AuthorisedScriptProofIndex)
 -&gt; UnsafeFromData AuthorisedScriptProofIndex
 forall a. (BuiltinData -&gt; a) -&gt; UnsafeFromData a
 $cunsafeFromBuiltinData :: BuiltinData -&gt; AuthorisedScriptProofIndex
 unsafeFromBuiltinData :: BuiltinData -&gt; AuthorisedScriptProofIndex
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">PlutusTx.UnsafeFromData</span></span></span><span>
-</span><span id="line-83"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679201480"><span class="annot"><span class="annottext">AuthorisedScriptProofIndex -&gt; AuthorisedScriptProofIndex -&gt; Bool
+</span><span id="line-83"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679205163"><span class="annot"><span class="annottext">AuthorisedScriptProofIndex -&gt; AuthorisedScriptProofIndex -&gt; Bool
 (AuthorisedScriptProofIndex -&gt; AuthorisedScriptProofIndex -&gt; Bool)
 -&gt; Eq AuthorisedScriptProofIndex
 forall a. (a -&gt; a -&gt; Bool) -&gt; Eq a
 $c== :: AuthorisedScriptProofIndex -&gt; AuthorisedScriptProofIndex -&gt; Bool
 == :: AuthorisedScriptProofIndex -&gt; AuthorisedScriptProofIndex -&gt; Bool
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">PlutusTx.Eq</span></span></span><span>
-</span><span id="line-84"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679201488"><span id="local-6989586621679201495"><span class="annot"><span class="annottext">Gen AuthorisedScriptProofIndex
+</span><span id="line-84"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679205171"><span id="local-6989586621679205178"><span class="annot"><span class="annottext">Gen AuthorisedScriptProofIndex
 Gen AuthorisedScriptProofIndex
 -&gt; (AuthorisedScriptProofIndex -&gt; [AuthorisedScriptProofIndex])
 -&gt; Arbitrary AuthorisedScriptProofIndex
@@ -405,7 +405,7 @@ and staking validators
 </span><a href="Cardano.YTxP.SDK.Redeemers.html#%24sel%3AauthorisedScriptProofIndex%3AYieldingRedeemer"><span class="hs-identifier hs-var hs-var">authorisedScriptProofIndex</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#AuthorisedScriptProofIndex"><span class="hs-identifier hs-type">AuthorisedScriptProofIndex</span></a></span><span>
 </span><span id="line-94"></span><span>  </span><span class="annot"><span class="hs-comment">-- ^ A tuple containing yielded to script type and the index at which to find proof: this allows us to avoid having to loop through inputs/mints/withdrawls to find the script we want to ensure is run.</span></span><span>
 </span><span id="line-95"></span><span>  </span><span class="hs-special">}</span><span>
-</span><span id="line-96"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">stock</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679201502"><span id="local-6989586621679201507"><span id="local-6989586621679201511"><span class="annot"><span class="annottext">Int -&gt; YieldingRedeemer -&gt; ShowS
+</span><span id="line-96"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">stock</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679205185"><span id="local-6989586621679205190"><span id="local-6989586621679205194"><span class="annot"><span class="annottext">Int -&gt; YieldingRedeemer -&gt; ShowS
 [YieldingRedeemer] -&gt; ShowS
 YieldingRedeemer -&gt; String
 (Int -&gt; YieldingRedeemer -&gt; ShowS)
@@ -420,7 +420,7 @@ $cshow :: YieldingRedeemer -&gt; String
 show :: YieldingRedeemer -&gt; String
 $cshowList :: [YieldingRedeemer] -&gt; ShowS
 showList :: [YieldingRedeemer] -&gt; ShowS
-</span><a href="../../../ghc-9.6.7/html/libraries/base-4.18.3.0/src/GHC.Show.html#Show"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></a></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679201514"><span id="local-6989586621679201516"><span class="annot"><span class="annottext">(forall x. YieldingRedeemer -&gt; Rep YieldingRedeemer x)
+</span><a href="../../../ghc-9.6.7/html/libraries/base-4.18.3.0/src/GHC.Show.html#Show"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></a></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679205197"><span id="local-6989586621679205199"><span class="annot"><span class="annottext">(forall x. YieldingRedeemer -&gt; Rep YieldingRedeemer x)
 -&gt; (forall x. Rep YieldingRedeemer x -&gt; YieldingRedeemer)
 -&gt; Generic YieldingRedeemer
 forall x. Rep YieldingRedeemer x -&gt; YieldingRedeemer
@@ -431,7 +431,7 @@ $cfrom :: forall x. YieldingRedeemer -&gt; Rep YieldingRedeemer x
 from :: forall x. YieldingRedeemer -&gt; Rep YieldingRedeemer x
 $cto :: forall x. Rep YieldingRedeemer x -&gt; YieldingRedeemer
 to :: forall x. Rep YieldingRedeemer x -&gt; YieldingRedeemer
-</span><a href="../../../ghc-9.6.7/html/libraries/base-4.18.3.0/src/GHC.Generics.html#Generic"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Generic</span></a></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679201519"><span id="local-6989586621679201523"><span class="annot"><span class="annottext">YieldingRedeemer -&gt; YieldingRedeemer -&gt; Bool
+</span><a href="../../../ghc-9.6.7/html/libraries/base-4.18.3.0/src/GHC.Generics.html#Generic"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Generic</span></a></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679205202"><span id="local-6989586621679205206"><span class="annot"><span class="annottext">YieldingRedeemer -&gt; YieldingRedeemer -&gt; Bool
 (YieldingRedeemer -&gt; YieldingRedeemer -&gt; Bool)
 -&gt; (YieldingRedeemer -&gt; YieldingRedeemer -&gt; Bool)
 -&gt; Eq YieldingRedeemer
@@ -442,8 +442,8 @@ $c/= :: YieldingRedeemer -&gt; YieldingRedeemer -&gt; Bool
 /= :: YieldingRedeemer -&gt; YieldingRedeemer -&gt; Bool
 </span><a href="../../../ghc-9.6.7/html/libraries/ghc-prim-0.10.0/src/GHC.Classes.html#Eq"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></a></span></span></span><span class="hs-special">)</span><span>
 </span><span id="line-97"></span><span>
-</span><span id="line-98"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679201528"><span class="annot"><span class="hs-identifier hs-type">Arbitrary</span></span><span> </span><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#YieldingRedeemer"><span class="hs-identifier hs-type">YieldingRedeemer</span></a></span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-99"></span><span>  </span><span id="local-6989586621679201537"><span class="annot"><span class="annottext">arbitrary :: Gen YieldingRedeemer
+</span><span id="line-98"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679205211"><span class="annot"><span class="hs-identifier hs-type">Arbitrary</span></span><span> </span><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#YieldingRedeemer"><span class="hs-identifier hs-type">YieldingRedeemer</span></a></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-99"></span><span>  </span><span id="local-6989586621679205220"><span class="annot"><span class="annottext">arbitrary :: Gen YieldingRedeemer
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">arbitrary</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">AuthorisedScriptIndex
 -&gt; AuthorisedScriptProofIndex -&gt; YieldingRedeemer
 </span><a href="Cardano.YTxP.SDK.Redeemers.html#YieldingRedeemer"><span class="hs-identifier hs-var">YieldingRedeemer</span></a></span><span> </span><span class="annot"><span class="annottext">(AuthorisedScriptIndex
@@ -465,22 +465,22 @@ forall a. Arbitrary a =&gt; Gen a
 </span><span id="line-100"></span><span>
 </span><span id="line-101"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">PlutusTx.Eq</span></span><span> </span><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#YieldingRedeemer"><span class="hs-identifier hs-type">YieldingRedeemer</span></a></span><span> </span><span class="hs-keyword">where</span><span>
 </span><span id="line-102"></span><span>  </span><span class="hs-pragma">{-# INLINEABLE</span><span> </span><span class="hs-pragma">(</span><span class="hs-pragma">==</span><span class="hs-pragma">)</span><span> </span><span class="hs-pragma">#-}</span><span>
-</span><span id="line-103"></span><span>  </span><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#YieldingRedeemer"><span class="hs-identifier hs-type">YieldingRedeemer</span></a></span><span> </span><span id="local-6989586621679201543"><span class="annot"><span class="annottext">AuthorisedScriptIndex
-</span><a href="#local-6989586621679201543"><span class="hs-identifier hs-var">si</span></a></span></span><span> </span><span id="local-6989586621679201544"><span class="annot"><span class="annottext">AuthorisedScriptProofIndex
-</span><a href="#local-6989586621679201544"><span class="hs-identifier hs-var">spi</span></a></span></span><span> </span><span id="local-6989586621679201545"><span class="annot"><span class="annottext">== :: YieldingRedeemer -&gt; YieldingRedeemer -&gt; Bool
-</span><span class="hs-operator hs-var hs-var hs-var hs-var">==</span></span></span><span> </span><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#YieldingRedeemer"><span class="hs-identifier hs-type">YieldingRedeemer</span></a></span><span> </span><span id="local-6989586621679201546"><span class="annot"><span class="annottext">AuthorisedScriptIndex
-</span><a href="#local-6989586621679201546"><span class="hs-identifier hs-var">si'</span></a></span></span><span> </span><span id="local-6989586621679201547"><span class="annot"><span class="annottext">AuthorisedScriptProofIndex
-</span><a href="#local-6989586621679201547"><span class="hs-identifier hs-var">spi'</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-103"></span><span>  </span><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#YieldingRedeemer"><span class="hs-identifier hs-type">YieldingRedeemer</span></a></span><span> </span><span id="local-6989586621679205226"><span class="annot"><span class="annottext">AuthorisedScriptIndex
+</span><a href="#local-6989586621679205226"><span class="hs-identifier hs-var">si</span></a></span></span><span> </span><span id="local-6989586621679205227"><span class="annot"><span class="annottext">AuthorisedScriptProofIndex
+</span><a href="#local-6989586621679205227"><span class="hs-identifier hs-var">spi</span></a></span></span><span> </span><span id="local-6989586621679205228"><span class="annot"><span class="annottext">== :: YieldingRedeemer -&gt; YieldingRedeemer -&gt; Bool
+</span><span class="hs-operator hs-var hs-var hs-var hs-var">==</span></span></span><span> </span><span class="annot"><a href="Cardano.YTxP.SDK.Redeemers.html#YieldingRedeemer"><span class="hs-identifier hs-type">YieldingRedeemer</span></a></span><span> </span><span id="local-6989586621679205229"><span class="annot"><span class="annottext">AuthorisedScriptIndex
+</span><a href="#local-6989586621679205229"><span class="hs-identifier hs-var">si'</span></a></span></span><span> </span><span id="local-6989586621679205230"><span class="annot"><span class="annottext">AuthorisedScriptProofIndex
+</span><a href="#local-6989586621679205230"><span class="hs-identifier hs-var">spi'</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-104"></span><span>    </span><span class="annot"><span class="annottext">AuthorisedScriptIndex
-</span><a href="#local-6989586621679201543"><span class="hs-identifier hs-var">si</span></a></span><span> </span><span class="annot"><span class="annottext">AuthorisedScriptIndex -&gt; AuthorisedScriptIndex -&gt; Bool
+</span><a href="#local-6989586621679205226"><span class="hs-identifier hs-var">si</span></a></span><span> </span><span class="annot"><span class="annottext">AuthorisedScriptIndex -&gt; AuthorisedScriptIndex -&gt; Bool
 forall a. Eq a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">PlutusTx.==</span></span><span> </span><span class="annot"><span class="annottext">AuthorisedScriptIndex
-</span><a href="#local-6989586621679201546"><span class="hs-identifier hs-var">si'</span></a></span><span> </span><span class="annot"><span class="annottext">Bool -&gt; Bool -&gt; Bool
+</span><a href="#local-6989586621679205229"><span class="hs-identifier hs-var">si'</span></a></span><span> </span><span class="annot"><span class="annottext">Bool -&gt; Bool -&gt; Bool
 </span><span class="hs-operator hs-var">PlutusTx.&amp;&amp;</span></span><span> </span><span class="annot"><span class="annottext">AuthorisedScriptProofIndex
-</span><a href="#local-6989586621679201544"><span class="hs-identifier hs-var">spi</span></a></span><span> </span><span class="annot"><span class="annottext">AuthorisedScriptProofIndex -&gt; AuthorisedScriptProofIndex -&gt; Bool
+</span><a href="#local-6989586621679205227"><span class="hs-identifier hs-var">spi</span></a></span><span> </span><span class="annot"><span class="annottext">AuthorisedScriptProofIndex -&gt; AuthorisedScriptProofIndex -&gt; Bool
 forall a. Eq a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">PlutusTx.==</span></span><span> </span><span class="annot"><span class="annottext">AuthorisedScriptProofIndex
-</span><a href="#local-6989586621679201547"><span class="hs-identifier hs-var">spi'</span></a></span><span>
+</span><a href="#local-6989586621679205230"><span class="hs-identifier hs-var">spi'</span></a></span><span>
 </span><span id="line-105"></span><span>
-</span><span id="line-106"></span><span id="local-6989586621679201550"><span id="local-6989586621679201555"><span id="local-6989586621679201557"><span class="hs-identifier">PlutusTx.makeIsDataIndexed</span><span> </span><span class="hs-special">''</span><span class="hs-identifier">YieldingRedeemer</span><span> </span><span class="hs-special">[</span><span class="hs-special">(</span><span class="hs-special">'</span><span class="hs-identifier">YieldingRedeemer</span><span class="hs-special">,</span><span> </span><span class="hs-number">0</span><span class="hs-special">)</span><span class="hs-special">]</span></span></span></span><span>
+</span><span id="line-106"></span><span id="local-6989586621679205233"><span id="local-6989586621679205238"><span id="local-6989586621679205240"><span class="hs-identifier">PlutusTx.makeIsDataIndexed</span><span> </span><span class="hs-special">''</span><span class="hs-identifier">YieldingRedeemer</span><span> </span><span class="hs-special">[</span><span class="hs-special">(</span><span class="hs-special">'</span><span class="hs-identifier">YieldingRedeemer</span><span class="hs-special">,</span><span> </span><span class="hs-number">0</span><span class="hs-special">)</span><span class="hs-special">]</span></span></span></span><span>
 </span><span id="line-107"></span></pre></body></html>

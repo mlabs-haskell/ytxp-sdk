@@ -7,7 +7,7 @@
 --   Provides off-chain and on-chain interoperability tools for YTxP
 --   pattern implementations
 @package ytxp-sdk
-@version 0.0.0.1
+@version 0.2.0
 
 module Cardano.YTxP.SDK.Redeemers
 
@@ -87,7 +87,7 @@ module Cardano.YTxP.SDK.SdkParameters
 -- | Parameters available during compilation (therefore not containing any
 --   script hashes).
 data SdkParameters
-SdkParameters :: [Natural] -> [Natural] -> AuthorisedScriptsSTCS -> SdkParameters
+SdkParameters :: [Natural] -> [Natural] -> [Natural] -> [Natural] -> [Natural] -> AuthorisedScriptsSTCS -> SdkParameters
 
 -- | A list of nonces for the yielding staking validators. One staking
 --   validator is compiled for each nonce. @since 0.1.0
@@ -96,6 +96,18 @@ SdkParameters :: [Natural] -> [Natural] -> AuthorisedScriptsSTCS -> SdkParameter
 -- | A list of nonces for the yielding minting policies. One minting policy
 --   is compiled for each nonce. @since 0.1.0
 [$sel:mintingPoliciesNonceList:SdkParameters] :: SdkParameters -> [Natural]
+
+-- | A list of nonces for the certifying staking validators. One certifying
+--   validator is compiled for each nonce. @since 0.2.0
+[$sel:certifyingValidatorsNonceList:SdkParameters] :: SdkParameters -> [Natural]
+
+-- | A list of nonces for the voting staking validators. One voting
+--   validator is compiled for each nonce. @since 0.2.0
+[$sel:votingValidatorsNonceList:SdkParameters] :: SdkParameters -> [Natural]
+
+-- | A list of nonces for the proposing staking validators. One proposing
+--   validator is compiled for each nonce. @since 0.2.0
+[$sel:proposingValidatorsNonceList:SdkParameters] :: SdkParameters -> [Natural]
 
 -- | The Currency symbol of the token that identifies authorised reference
 --   scripts . @since 0.1.0
