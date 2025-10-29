@@ -1,3 +1,5 @@
+> ⚠️ This repository has been archived. The code has moved to [ytxp-lib/ytxp-sdk](https://github.com/mlabs-haskell/ytxp-lib/tree/master/ytxp-sdk).
+
 # Yielding Transaction Pattern SDK (ytxp-sdk)
 
 This library includes YTxP types and instances for serialization, pretty
